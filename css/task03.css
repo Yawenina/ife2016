@@ -1,0 +1,74 @@
+/*Common Style*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    padding:20px;
+}
+.wrapper,.team,.intro,.profile{
+    padding:20px;
+    border:1px solid #999;
+}
+.team,.intro,.profile{
+    background-color:#fff;
+}
+/*Wrapper*/
+.wrapper{
+    background-color:#eee;
+}
+
+/*Team*/
+.team{
+    width:200px;
+}
+.team img{
+    float:left;
+    margin-right:20px;
+}
+.team::after{
+    content:'';
+    display:block;
+    clear:both;
+}
+
+/*Profile*/
+.profile{
+    width:120px;
+}
+
+/*Intro*/
+.intro{
+    margin-left:220px;
+    margin-right:140px;
+}
+
+/*Float & margin*/
+
+.wrapper::after{
+    content:'';
+    display:block;
+    clear:both;
+}
+.team{
+    float:left;
+}
+.profile{
+    float:right;
+}
+
+
+/*Position*/
+/*.wrapper{*/
+    /*position: relative;*/
+    /*height:500px;*/
+
+/*}*/
+/*.team{*/
+    /*position:absolute;*/
+/*}*/
+/*.profile{*/
+    /*position: absolute;*/
+    /*right:20px;*/
+/*}*/

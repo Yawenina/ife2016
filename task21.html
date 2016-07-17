@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 21</title>
+    <style>
+        .tag,.delete,.hobby{
+            display: inline-block;
+            padding: 15px;
+            color:#fff;
+            margin:10px ;
+            transition:all .5s;
+        }
+        .tag{background: #cceeff;}
+        .delete{background: red;}
+        .hobby{background-color:#FFD86A;}
+    </style>
+</head>
+<body>
+
+<div id="tags">
+    <input type="text" id="text"/>
+    <div id="showTags"></div>
+
+</div>
+
+<div id="hobbies">
+    <textarea  id="hobbyInput" cols="30" rows="10"></textarea>
+    <button id="subHobby">确认兴趣爱好</button>
+    <div id="showHobbies"></div>
+</div>
+
+
+
+
+
+<script>
+    function $(el){
+        return document.querySelector(el);
+    }
+
+    //处理标签
+    var tags = (function(){
+
+        //cache dom
+        const input = $("#text");
+        const showTags = document.getElementById("showTags");
+
+        //data
+        let tags = ['html','js','css',4,5,6,7,8,9,10];
+
+        //render view
+        function _render(){
+            showTags.innerHTML =  '';
+            for(var i=0;i<tags.length;i++){
+                showTags.innerHTML += `<span class='tag' data-index=${i}>${tags[i]}</span>`;
+            }
+        }
+        _render();
+
+        //bind events
+        input.addEventListener("keyup",addTag);
+        showTags.addEventListener("mouseover",changeText);
+        showTags.addEventListener("mouseout",goBack);
+        showTags.addEventListener("click",deleteTag);
+
+        //event handler
+        function addTag(){
+            let text = input.value;
+            let pattern = /[,\s\n]/;
+            if(pattern.test(text)){
+                //当输入中有,\n\s时截取输入值并去掉空格
+                var tag = text.slice(0,text.length-1).trim();
+                //判断输入值是否已经存在tags中
+                if(tags.toString().indexOf(tag) == -1){
+                    tags.push(tag);
+                }
+                input.value = "";
+            }
+            //判断是否有10个tag
+            if(tags.length > 10){
+                tags = tags.slice(tags.length-10)
+            }
+            _render();
+        }
+
+        function changeText(){
+            if(event.target && event.target.nodeName == "SPAN"){
+                let text = event.target.innerHTML;
+                event.target.className = "delete";
+                event.target.innerHTML ="点击删除"+text;
+            }
+        }
+
+        function goBack(){
+            if(event.target && event.target.nodeName == "SPAN"){
+                let text = event.target.innerHTML;
+                event.target.className = "tag";
+                event.target.innerHTML =text.slice(4);
+            }
+        }
+
+        function deleteTag(){
+            if(event.target && event.target.nodeName == "SPAN"){
+                let index = event.target.dataset.index;
+                tags.splice(index,1);
+                _render();
+            }
+        }
+
+
+    })()
+
+    var hobbies = (function(){
+        //cache dom
+        const hobbyInput = $("#hobbyInput");
+        const subHobby = $("#subHobby");
+        const showHobbies = $("#showHobbies");
+
+        //data
+        let hobbies = ["游泳","瑜伽","摄影"];
+
+        //_render
+        function _render(){
+            showHobbies.innerHTML =  '';
+            for(var i=0;i<hobbies.length;i++){
+                showHobbies.innerHTML += `<span class='hobby'>${hobbies[i]}</span>`;
+            }
+        }
+        _render();
+
+
+        //bind events
+        subHobby.addEventListener("click",addHobby);
+
+        //event handler
+        function addHobby(){
+            let pattern = /[,、，\s\n]/;
+            if(hobbyInput.value){
+                let text = hobbyInput.value.split(pattern);
+                text.map(function(item){
+                    if(hobbies.toString().indexOf(item) == -1){
+                        hobbies.push(item.trim());
+                    }
+                })
+            }
+
+            if(hobbies.length > 10){
+                hobbies = hobbies.slice(hobbies.length-10)
+            }
+            _render();
+        }
+
+    })();
+
+
+</script>
+</body>
+</html>

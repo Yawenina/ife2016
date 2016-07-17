@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>Task 20</title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<style>
+		body{padding:50px;}
+		#output{margin-top:20px;}
+		#output div{
+			display: inline-block;
+			padding:10px;
+			background-color: pink;
+			margin-right: 10px;
+			margin-bottom:5px;
+		}
+		#output span{background:red;}
+	</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 ">
+				<div class="jumbotron ">
+					<h1 class="text-center">Task 20</h1>
+					<br>
+					<form action="">
+						<div class="form-group">
+							<label for="text">输入你的信息</label>
+							<textarea name="text" id="text" cols="30" rows="5" class="form-control" placeholder="输入你的信息并用符号隔开"></textarea>
+
+						</div>
+						<button class="btn btn-success" id="subBtn">提交</button>
+			
+						<br><br>	
+						<div class="form-group">
+							<label for="search">查询</label>
+							<input type="search" class="form-control" id="searchText">
+						</div>
+						<button class="btn btn-success" id="searchBtn">查询</button>
+					</form>
+
+					<div id="output"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		//get dom
+		function $(el){
+			return document.querySelector(el);
+		}
+
+		var text = [];
+
+		//hevent handlers 
+		function getText(){
+			event.preventDefault();
+			//split and push text into text
+			var pattern = /[^\u4e00-\u9fa50-9A-Za-z]+/g;
+			text = $("#text").value.trim().split(pattern);
+			console.log(text);
+			render();
+		}
+
+		function searchText(){
+			event.preventDefault();
+			var str = $("#searchText").value.trim();
+			render(str);
+		}
+
+
+		//bind events
+
+		$("#subBtn").addEventListener("click",getText);
+		$("#searchBtn").addEventListener("click",searchText);
+
+		
+		//render #output
+		function render(str){
+			$("#output").innerHTML = text.map(function(item){
+				if(str !=null && str.length>0){
+					var pattern = new RegExp(str,"gi")
+					item = item.replace(pattern,"<span class = 'select'>" + str + "</span>");
+				}
+				return "<div>" + item +"</div>";
+			}).join("");
+		}
+
+
+
+
+	</script>
+
+
+</body>
+</html>

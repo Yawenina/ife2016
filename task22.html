@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 22</title>
+    <style>
+        div{
+            border:2px solid #aaa;
+            display: flex;
+            flex-direction:row;
+            justify-content:space-around;
+            align-items:center;
+            padding:15px;
+        }
+        .container{
+            width:80%;
+            height:300px;
+            margin:10px auto;
+        }
+        div{
+            display: flex;
+            flex-grow:1;
+            border:1px solid black;
+            margin:30px 20px;
+        }
+
+        section{
+            width:30%;
+            display: flex;
+            justify-content:space-around;
+            margin:30px auto;
+        }
+        .active{
+            background-color:pink;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="choice">
+        <button id="dlr">前序</button>
+        <button id="ldr">中序</button>
+        <button id="lrd">后序</button>
+    </section>
+
+    <script>
+
+
+    let dlr = document.getElementById('dlr'),
+        ldr = document.getElementById('ldr'),
+        lrd = document.getElementById('lrd'),
+        container = document.querySelector('.container'),
+        list = [];
+
+//前序遍历
+    function preOrder(node){
+        if(node!=null){
+            list.push(node)
+            preOrder(node.firstElementChild)
+            preOrder(node.lastElementChild)
+        }
+    }
+
+//中序遍历
+    function inOrder(node){
+        if(node!=null){
+            inOrder(node.firstElementChild)
+            list.push(node)
+            inOrder(node.lastElementChild)
+        }
+    }
+
+//后序遍历
+    function postOrder(node){
+        if(node!=null){
+            postOrder(node.firstElementChild)
+            postOrder(node.lastElementChild)
+            list.push(node)
+        }
+    }
+
+//颜色改变
+    function changeColor(){
+        let i=0;
+        list[i].style.background = 'pink'
+        let timer = setInterval(function(){
+            i++;
+            if(i<list.length){
+                //前后颜色不一致的区分
+                list[i].style.background = 'pink'
+                list[i-1].style.background = '#fff'
+            }else{
+                clearInterval(timer)
+                //结束后设置初始颜色
+                list[list.length-1].style.background = '#fff'
+                //list为全局变量，每次遍历后要清空list
+                list = []
+            }
+        },500)
+    }
+
+    window.onload = function(){
+        dlr.onclick = function(){
+            preOrder(container)
+            changeColor()
+        }
+
+        ldr.onclick = function(){
+            inOrder(container)
+            changeColor()
+        }
+
+        lrd.onclick = function(){
+            postOrder(container)
+            changeColor()
+        }
+    }
+
+    </script>
+</body>
+</html>
