@@ -1,2 +1,4 @@
 .DS_Store
 .idea
+node_modules/
+js/task25-compiled.js.map
