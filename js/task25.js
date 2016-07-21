@@ -1,10 +1,15 @@
-
 let $ = function(el){
     return document.querySelector(el)
 }
+
 //缓存DOM
-let container = $('.container')
-let list = $('.list')
+let  list = $('.list'),
+     input = $('#searchInput'),
+     bfBtn = $('#bfBtn')
+//数据
+let traverseList = [],
+    text = '',
+    searchContent = []
 
 //折叠菜单
 function toggleMenu(e){
@@ -40,8 +45,10 @@ function addNode(e){
     //1.若为root,则添加li;2.若后面有同辈元素且为UL,则在同辈元素中添加;3.若后面无同辈元素,则新增加同辈元素UL
     if(contentDiv.className.includes('root')){
           contentDiv.parentNode.appendChild(template.content)
+          contentDiv.className = 'open root content'
     }else if(nextElem && nextElem.nodeName == 'UL'){
         nextElem.appendChild(template.content)
+        contentDiv.className = 'open content'
     }else{
         strHTML = '<ul>' + strHTML + '</ul>'
         template.innerHTML = strHTML
@@ -67,7 +74,8 @@ function removeNode(e){
     }
 }
 
-function handler(e){
+//ul点击处理程序
+function listHandler(e){
     let className = e.target.className
     if(className.includes('content')){
         toggleMenu(e)
@@ -77,5 +85,67 @@ function handler(e){
         removeNode(e)
     }
 }
-container.addEventListener('click',handler)
 
+//广度优先遍历
+function traverseBF(node){
+    let nodeList = []
+    nodeList.push(node)
+    //存储遍历节点
+    traverseList.push(node)
+    let currentNode = nodeList.shift()
+
+    while(currentNode){
+        for(let i=0,len=currentNode.children.length;i<len;i++){
+            let child = currentNode.children[i]
+            nodeList.push(child)
+            traverseList.push(child)
+        }
+        currentNode = nodeList.shift()
+    }
+}
+
+function setColor(){
+    for(let i =0,len = traverseList.length;i<len;i++){
+        if(traverseList[i].innerText.trim() == text){
+            traverseList[i].style.color = '#E35885'
+            searchContent.push(traverseList[i])
+
+            //展开之前的元素
+            for(let j =0;j<i;j++){
+                if(traverseList[j].className.includes('root')){
+                    traverseList[j].className = 'open root content'
+                }else if(traverseList[j].className.includes('close')){
+                    traverseList[j].className = 'open content'
+                }
+            }
+        }
+   }
+    if(searchContent.length == 0){
+        alert('没有找到相应节点!')
+    }
+}
+
+function reset(){
+    //之前选中的元素为黑色
+    for(let i=0;i<searchContent.length;i++){
+        searchContent[i].style.color = 'black'
+    }
+    //存储遍历节点设置为空
+    searchContent = []
+    traverseList = []
+}
+
+function searchHandler(){
+    if(!text){
+        alert('请输入查询内容!')
+        return false
+    }
+    reset()
+    traverseBF(list)
+    setColor()
+}
+
+//事件绑定
+list.addEventListener('click',listHandler)
+input.addEventListener('change',() => text = input.value)
+bfBtn.addEventListener('click',searchHandler)
