@@ -1,0 +1,90 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.track-1,.track-2,.track-3,.track-4,.planet{
+    border: 2px solid #00B5B5;
+    margin:30px;
+    border-radius: 50%;
+    position: relative;
+}
+.track-1{
+    width:400px;
+    height:400px;
+    margin:50px auto;
+    position: relative;
+}
+.track-2{
+    width:340px;
+    height:340px;
+}
+.track-3{
+    width: 280px;
+    height:280px;
+}
+.track-4{
+    width: 220px;
+    height: 220px;
+}
+.planet{
+    width:160px;
+    height:160px;
+    background:#4BCD67;
+    border:none;
+}
+.spaceship{
+    position: absolute;
+    width:50px;
+    height: 20px;
+    left:175px;
+    background:#36B0FC;
+    transform: rotate(0deg);
+    text-align: center;
+    color: #fff;
+}
+#spaceship-1{
+    top:-10px;
+    transform-origin: 15px 210px;
+}
+#spaceship-2{
+    top:22px;
+    transform-origin: 15px 184px;
+}
+#spaceship-3{
+    top:54px;
+    transform-origin: 15px 152px;
+}
+#spaceship-4{
+    top:86px;
+    transform-origin: 15px 120px;
+}
+.controller{
+    margin-left:100px;
+}
+li{
+    margin-bottom: 5px;
+}
+button{
+    padding: 5px;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.create{
+    background: #5cb85c;
+    border-color: #4cae4c;
+}
+.fly{
+    background: #31b0d5;
+    border-color: #269abc;
+}
+.stop{
+    background: #ec971f;
+    border-color: #eea236;
+}
+.destroy{
+    background: #c9302c;
+    border-color: #ac2925;
+}
