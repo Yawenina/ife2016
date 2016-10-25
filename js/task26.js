@@ -21,7 +21,7 @@ Spaceship.prototype.dynamicSystem = function () {
     self.timer = setInterval(function(){
       self.deg += spaceshipSpeed;
       if (self.deg >= 360) self.deg = 0;
-      AnimationUtil.fly(self.id, self.deg);
+      AnimationUtil.fly(self.id, self.deg);e
     }, 200);
     console.log(`Spaceship # ${self.id} is flying`);
   };
