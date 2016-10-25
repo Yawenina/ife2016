@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 29</title>
+    <style>
+        .container{
+            width:60%;
+            margin:50px auto;
+        }
+        label{
+            width: 5%;
+            display: inline-block;
+        }
+        input{
+            width: 40%;
+            border-radius: 5px;
+            border: 1px solid #d3d3d3;
+            height: 30px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        button{
+            width: 70px;
+            height: 32px;
+            background: dodgerblue;
+            border-radius: 5px;
+            border: 1px solid dodgerblue;
+            color: #fff;
+        }
+        #info{
+            margin-left: 10%;
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="">
+            <div class="form-control">
+                <label for="userInput">名称</label>
+                <input type="text" id="userInput">
+                <button id="verify">验证</button>
+                <p id="info">必填，长度为4~16个字符</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        //cache dom
+        let userInput = document.getElementById("userInput");
+        let verifyBtn = document.getElementById("verify");
+        let info = document.getElementById("info")
+
+        function showError() {
+            userInput.style.borderColor = "red";
+            info.style.color = "red";
+        }
+
+        function calInputLength(value) {
+            let count = 0;
+            for (let i=0,len = value.length; i< len; i++){
+                let char = value.charCodeAt(i);
+                if (char >= 0  && char <= 128) {
+                    count += 1;
+                } else {
+                    count += 2;
+                }
+            }
+            return count;
+        }
+
+        function verifyInput() {
+            console.log('hi')
+            event.preventDefault();
+            value = userInput.value.trim();
+            let valueLength = calInputLength(value);
+            if (valueLength === 0) {
+                showError();
+                info.textContent = "内容不能为空";
+            } else if (valueLength >=4 && valueLength <= 16) {
+                userInput.style.borderColor = "green";
+                info.style.color = "green";
+                info.textContent = "内容格式正确";
+            } else {
+                showError();
+                info.textContent = "内容为4-16个字符"
+            }
+        }
+
+        verifyBtn.addEventListener('click', verifyInput);
+    </script>
+</body>
+</html>
