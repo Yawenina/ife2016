@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 27</title>
+    <style>
+        .container{
+            display: flex;
+            flex-direction: row;
+            padding-left: 50px;
+        }
+        .planet-wrapper{
+            width:50%;
+            margin:50px;
+            position: relative;
+        }
+        .track div{
+            border:2px solid  #00B5B5;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .track-1{
+            width:400px;
+            height:400px;
+        }
+        .track-2{
+            width: 340px;
+            height: 340px;
+            left: 30px;
+            top:30px;
+        }
+        .track-3{
+            width: 280px;
+            height: 280px;
+            left: 60px;
+            top: 60px;
+        }
+        .track-4{
+            width: 220px;
+            height: 220px;
+            top: 90px;
+            left:90px;
+        }
+        .moon{
+            width:150px;
+            height:150px;
+            top: 125px;
+            left:125px;
+            background:#00B5B5;
+        }
+        .panel{
+            margin-bottom:20px;
+            border:2px solid #ddd;
+            padding: 10px;
+        }
+        .response-panel{
+            height:150px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!--星球-->
+        <div class="planet-wrapper">
+            <div class="ships"></div>
+            <div class="track">
+                <div class="track-1"></div>
+                <div class="track-2"></div>
+                <div class="track-3"></div>
+                <div class="track-4"></div>
+                <div class="moon"></div>
+            </div>
+        </div>
+
+        <!--控制台-->
+        <div class="panel-group">
+            <div class="panel choice-panel">
+                <p>
+                    动力系统选择: <br>
+                    <input type="radio" name="speedType" value="normal" id="speed-1" checked>
+                    <label for="speed-1">前进号 （速率20px/s, 能耗5%/s）</label><br>
+                    <input type="radio" name="speedType" value="middle" id="speed-2">
+                    <label for="speed-2">奔腾号 （速率60px/s, 能耗8%/s）</label><br>
+                    <input type="radio" name="speedType" value="fast" id="speed-3">
+                    <label for="speed-3">超越号 （速率100px/s, 能耗10%/s）</label>
+                </p>
+
+                <p>
+                    能源系统选择: <br>
+                    <input type="radio" name="powerType" value="low" id="power-1" checked>
+                    <label for="power-1">劲量型 （补充能源速度2%/s）</label><br>
+                    <input type="radio" name="powerType" value="middle" id="power-2">
+                    <label for="power-2">光能型 （补充能源速度5%/s）</label><br>
+                    <input type="radio" name="powerType" value="quick" id="power-3">
+                    <label for="power-3">永久型 （补充能源速度8%/s）</label>
+                </p>
+                <button id="create-spaceship">创建新飞船</button>
+            </div>
+
+            <div class="panel commander-panel">
+            </div>
+
+            <div class="panel response-panel">
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/task27.js"></script>
+</body>
+</html>
