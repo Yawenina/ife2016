@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 30</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin:0;
+            padding: 0;
+        }
+        form{
+            width: 55%;
+            margin:50px auto;
+        }
+        .form-control{
+            margin-bottom: 30px;
+        }
+        .form-control label{
+            width:10%;
+            display: inline-block;
+            text-align: right;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .form-control input{
+            width: 85%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        #submitBtn{
+            float: right;
+            width:80px;
+            padding: 10px 15px;
+            background:#337ab7;
+            color: #fff;
+            font-size:16px;
+            border: none;
+            border-radius: 5px;
+        }
+        .rule,.error,.success{
+            margin-left: 12%;
+        }
+        .rule{
+            color: #999;
+        }
+        .error{
+            color: red;
+        }
+        .success{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <div class="form-control">
+            <label for="name">名称</label>
+            <input type="text" id="name">
+            <p></p>
+        </div>
+        <div class="form-control">
+            <label for="psd">密码</label>
+            <input type="password" id="psd">
+            <p></p>
+        </div>
+        <div class="form-control">
+            <label for="psdConfirm">密码确认</label>
+            <input type="password" id="psdConfirm">
+            <p></p>
+        </div>
+        <div class="form-control">
+            <label for="email">邮箱 </label>
+            <input type="email" id="email">
+            <p></p>
+        </div>
+        <div class="form-control">
+            <label for="phone">手机</label>
+            <input type="number" id="phone">
+            <p></p>
+        </div>
+        <button id="submitBtn">提交</button>
+    </form>
+    <script src="./js/task30.js"></script>
+</body>
+</html>
