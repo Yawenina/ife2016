@@ -11,7 +11,7 @@ let schools = [
   ['四川大学', '电子科技大学', '西南财经大学']
 ]
 
-function radioHandler() {
+function personTypeHandler() {
   let curr_person_type = event.target.value;
   if (curr_person_type === last_person_type) {
     return false;
@@ -22,10 +22,10 @@ function radioHandler() {
   }
 }
 
-function cityChangeHandler () {
-  schools_options.textContent = '';
+function renderSchoolsOptions () {
   let show_schools = schools[city_select.selectedIndex];
   let fragment = document.createDocumentFragment();
+  schools_options.textContent = '';
   show_schools.forEach(function (school) {
     let option = document.createElement('option');
     option.value = school;
@@ -36,11 +36,11 @@ function cityChangeHandler () {
 }
 
 Array.prototype.forEach.call(radios, function (node) {
-  node.addEventListener('click', radioHandler);
+  node.addEventListener('click', personTypeHandler);
 });
 
-city_select.addEventListener('change', cityChangeHandler);
+city_select.addEventListener('change', renderSchoolsOptions);
 
 
 // 初始化大学选择下拉框
-cityChangeHandler();
+renderSchoolsOptions();
