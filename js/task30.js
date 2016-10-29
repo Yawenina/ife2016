@@ -48,7 +48,7 @@ function blurHandler() {
       tipsElem = target.nextElementSibling,
       flag = false;
   if (id === 'psdConfirm') {
-    flag = (inputs[2].value === value)
+    flag  = (value && inputs[2].value === value ) ? true : false
   } else {
     flag = new RegExp(warningInfo[id]['regexp']).test(value)
   }

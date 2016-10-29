@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 31</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        .container{
+            width:35%;
+            margin:70px auto;
+            font-size: 20px;
+        }
+        .radio-wrapper, .more{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-bottom: 50px;
+        }
+        select, input[type="text"]{
+            width: 150px;
+            padding: 6px 12px;
+            height: 34px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="text"]{
+            width: 300px;
+        }
+        #outSchool{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="radio-wrapper">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="personType" value="atSchool" checked>
+                    在校生
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="personType" value="outSchool">
+                    非在校生
+                </label>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="atSchool" class="more">
+                <h4>学校</h4>
+                <select name="" id="cities">
+                    <option value="北京">北京</option>
+                    <option value="上海">上海</option>
+                    <option value="四川">四川</option>
+                </select>
+                <select name="" id="schools">
+                </select>
+            </div>
+            <div id="outSchool" class="more">
+                <h4>就业单位</h4>
+                <input type="text">
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/task31.js"></script>
+</body>
+</html>
