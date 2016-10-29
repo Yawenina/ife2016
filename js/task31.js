@@ -1,28 +1,32 @@
 /**
  * Created by yawenina on 10/29/16.
  */
-let radios = document.querySelectorAll('input[type="radio"]');
-let last_person_type = 'atSchool';
-let city_select = document.getElementById('cities');
-let schools_options = document.getElementById('schools');
-let schools = [
-  ['清华大学', '北京大学', '中国人民大学'],
-  ['复旦大学', '同济大学', '上海交通大学'],
-  ['四川大学', '电子科技大学', '西南财经大学']
-]
+let radio_wrapper = $('.radio-wrapper');
+let at_school_radio = $('#atSchoolRadio');
+let city_select = $('#cities');
+let schools_options = $('#schools');
 
+function $(selector) {
+  return document.querySelector(selector);
+}
 function personTypeHandler() {
-  let curr_person_type = event.target.value;
-  if (curr_person_type === last_person_type) {
-    return false;
+  let at_school_div = $('#atSchool');
+  let out_school_div = $('#outSchool');
+  if (at_school_radio.checked) {
+    at_school_div.style.display = 'flex';
+    out_school_div.style.display = 'none';
   } else {
-    document.getElementById(last_person_type).style.display = 'none';
-    document.getElementById(curr_person_type).style.display = 'flex';
-    last_person_type = curr_person_type;
+    out_school_div.style.display = 'flex';
+    at_school_div.style.display = 'none';
   }
 }
 
 function renderSchoolsOptions () {
+  let schools = [
+    ['清华大学', '北京大学', '中国人民大学'],
+    ['复旦大学', '同济大学', '上海交通大学'],
+    ['四川大学', '电子科技大学', '西南财经大学']
+  ];
   let show_schools = schools[city_select.selectedIndex];
   let fragment = document.createDocumentFragment();
   schools_options.textContent = '';
@@ -35,9 +39,7 @@ function renderSchoolsOptions () {
   schools_options.appendChild(fragment);
 }
 
-Array.prototype.forEach.call(radios, function (node) {
-  node.addEventListener('click', personTypeHandler);
-});
+radio_wrapper.addEventListener('change', personTypeHandler);
 
 city_select.addEventListener('change', renderSchoolsOptions);
 
