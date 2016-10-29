@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task32</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        button{
+            width:80px;
+            padding: 10px 15px;
+            background:#337ab7;
+            color: #fff;
+            font-size:16px;
+            border: none;
+            border-radius: 5px;
+        }
+        .container{
+            width: 80%;
+            margin: 20px auto;
+            display: flex;
+        }
+        aside{
+            width:30%;
+            margin-right: 20px;
+        }
+        fieldset{
+            padding:10px;
+            margin-bottom: 20px;
+        }
+        label{
+            width: 30%;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        main{
+            width:70%;
+            padding: 20px 10px;
+            border: 1px solid #222;
+            border-radius:5px;
+        }
+        main h4 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <form action="">
+                <fieldset>
+                    <legend>类型</legend>
+                    <label>
+                        <input type="radio" name="inputType"> 输入框
+                    </label>
+                    <label>
+                        <input type="radio" name="inputType"> 单选框
+                    </label>
+                    <label>
+                        <input type="radio" name="inputType"> 多选框
+                    </label>
+                    <label>
+                        <input type="radio" name="inputType"> 下拉框
+                    </label>
+                    <label>
+                        <input type="radio" name="inputType"> 文本框
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>配置</legend>
+                    <label>
+                        名称：<input type="text">
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="settings"> 必填
+                    </label>
+                    <label>
+                        <input type="radio" name="settings"> 选填
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>规则</legend>
+                    <label>
+                        <input type="radio" name="rules"> 文字
+                    </label>
+                    <label>
+                        <input type="radio" name="rules"> 数字
+                    </label>
+                    <label>
+                        <input type="radio" name="rules"> 邮箱
+                    </label>
+                    <label>
+                        <input type="radio" name="rules"> 电话号码
+                    </label>
+                    <label>
+                        <input type="radio" name="rules"> 密码
+                    </label>
+                </fieldset>
+            </form>
+            <button>Add</button>
+        </aside>
+        <main>
+            <h4>表单展示</h4>
+        </main>
+    </div>
+
+</body>
+</html>
