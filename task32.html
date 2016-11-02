@@ -45,47 +45,60 @@
         main h4 {
             text-align: center;
         }
+       .options{
+            display: none;
+        }
+        .option{
+            display: inline-block;
+            padding: 5px 10px;
+            color: #fff;
+            background: indianred;
+            margin: 5px;
+        }
+        .delete-option{
+            background: dodgerblue;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <aside>
             <form action="">
-                <fieldset>
+                <fieldset class="input-type">
                     <legend>类型</legend>
                     <label>
-                        <input type="radio" name="inputType"> 输入框
+                        <input type="radio" name="inputType" value="输入框" checked> 输入框
                     </label>
                     <label>
-                        <input type="radio" name="inputType"> 单选框
+                        <input type="radio" name="inputType" value="单选框"> 单选框
                     </label>
                     <label>
-                        <input type="radio" name="inputType"> 多选框
+                        <input type="radio" name="inputType" value="多选框"> 多选框
                     </label>
                     <label>
-                        <input type="radio" name="inputType"> 下拉框
+                        <input type="radio" name="inputType" value="下拉框"> 下拉框
                     </label>
                     <label>
-                        <input type="radio" name="inputType"> 文本框
+                        <input type="radio" name="inputType" value="文本域"> 文本域
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="config">
                     <legend>配置</legend>
                     <label>
-                        名称：<input type="text">
+                        名称：<input type="text" value="名称" id="labelName">
                     </label>
                     <br>
                     <label>
-                        <input type="radio" name="settings"> 必填
+                        <input type="radio" name="settings" checked> 必填
                     </label>
                     <label>
                         <input type="radio" name="settings"> 选填
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="rules">
                     <legend>规则</legend>
                     <label>
-                        <input type="radio" name="rules"> 文字
+                        <input type="radio" name="rules" checked> 文字
                     </label>
                     <label>
                         <input type="radio" name="rules"> 数字
@@ -100,13 +113,28 @@
                         <input type="radio" name="rules"> 密码
                     </label>
                 </fieldset>
+                <fieldset class="options">
+                    <legend>选项</legend>
+                    <label>
+                        <input type="text" id="addOptions">
+                    </label>
+                    <div class="show-options"></div>
+                </fieldset>
+                <fieldset class="length-limitation">
+                    <legend>长度限制</legend>
+                    <label>
+                        字符范围:
+                        <input type="number" value="4" id="lowLength"> - <input type="number" value="16" id="highLength">
+                    </label>
+                </fieldset>
             </form>
-            <button>Add</button>
+            <button id="addInput">Add</button>
         </aside>
         <main>
             <h4>表单展示</h4>
+            <button id="submitFormBtn">提交</button>
         </main>
     </div>
-
+    <script src="./js/task32.js"></script>
 </body>
 </html>

@@ -2,3 +2,6 @@
 
 ##Task25
 	- fragment后不能跟innerHTML，不会解析为正常的node
+
+## Task32
+  - 获取选择的单选框： `document.querySelector("input[name='radioName']:checked")`
