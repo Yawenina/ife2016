@@ -89,28 +89,28 @@
                     </label>
                     <br>
                     <label>
-                        <input type="radio" name="settings" checked> 必填
+                        <input type="radio" name="rules" value="必填" checked> 必填
                     </label>
                     <label>
-                        <input type="radio" name="settings"> 选填
+                        <input type="radio" name="rules" value="选填"> 选填
                     </label>
                 </fieldset>
-                <fieldset class="rules">
+                <fieldset class="settings">
                     <legend>规则</legend>
                     <label>
-                        <input type="radio" name="rules" checked> 文字
+                        <input type="radio" name="settings" value="text" checked> 文字
                     </label>
                     <label>
-                        <input type="radio" name="rules"> 数字
+                        <input type="radio" name="settings" value="number"> 数字
                     </label>
                     <label>
-                        <input type="radio" name="rules"> 邮箱
+                        <input type="radio" name="settings" value="email"> 邮箱
                     </label>
                     <label>
-                        <input type="radio" name="rules"> 电话号码
+                        <input type="radio" name="settings" value="phone"> 电话号码
                     </label>
                     <label>
-                        <input type="radio" name="rules"> 密码
+                        <input type="radio" name="settings" value="password"> 密码
                     </label>
                 </fieldset>
                 <fieldset class="options">
@@ -135,6 +135,6 @@
             <button id="submitFormBtn">提交</button>
         </main>
     </div>
-    <script src="./js/task32.js"></script>
+    <script src="js/task32/task32.js"></script>
 </body>
 </html>

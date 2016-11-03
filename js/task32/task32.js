@@ -4,11 +4,19 @@
 //cache dom
 let input_type_div = $('.input-type');
 let submit_form_btn = $('#submitFormBtn');
+let add_input_btn = $('#addInput');
 let option_input = $('#addOptions');
 let show_options_div = $('.show-options');
 
 let input_type = '输入框';
 let options = [];
+let translateType = {
+  '输入框': 'text',
+  '单选框': 'radio',
+  '多选框': 'checkbox',
+  '下拉框': 'select',
+  '文本域': 'textarea'
+}
 
 //工具函数
 function $(selector) {
@@ -46,7 +54,9 @@ function showOptionDivs() {
   }
 }
 
-
+/**
+ * Created by yawenina on 11/2/16.
+ */
 //对单选多选的处理模块
 function addOptions() {
   event.preventDefault();
@@ -104,35 +114,74 @@ function updateOptionsDOM(text) {
   show_options_div.appendChild(span);
 }
 
-
 //获取Input配置信息
 function getInputInfo() {
+  let type = translateType[input_type];
   let label = $('#labelName').value;
   let settings = $("input[name='settings']:checked").value;
-  let options = [];
-  let lengthArr = [];
-  let rules = '';
-
-  if (input_type === '单选框' || input_type === '多选框' || input_type === "下拉框") {
-    options = [];
-  } else{
-    lengthArr[0] = $('#lowLength').value;
-    lengthArr[1] = $('#highLength').value;
-    if (input_type === '输入框') {
-      rules = $("input[name='rules']:checked").value
-    }
+  let rules = $("input[name='rules']:checked").value;
+  if (type === 'text' || type === 'textarea') {
+    rules  = rules + '，长度为' + $('#lowLength').value + '-' + $('#highLength').value + '个字符';
   }
   return {
+    type,
     label,
     settings,
     options,
-    lengthArr,
     rules
   }
 }
 
 function createInput(config) {
+  let div = document.createElement('div');
+  div.className = 'form-control';
+  let label = document.createElement('label');
+  label.textContent = config.label;
+  div.appendChild(label);
 
+  if (config.type === 'select') {
+    if (!options.length) {
+      alert('请添加下拉框选项！');
+    } else {
+      let select = createSelection(options);
+      div.appendChild(select);
+      return div;
+    }
+  }
+
+  if (config.type === 'radio' || config.type === 'checkbox') {
+    if (!options.length) {
+      alert('请添加选择框选项！');
+    } else {
+      let id = $('main').children.length - 2;
+      createRadioOrCheckBox(config.type, options, id, div);
+      return div;
+    }
+  }
+}
+
+function createSelection(options) {
+    let select = document.createElement('select');
+    for(let i = 0, len = options.length; i < len; i++ ) {
+      let option = document.createElement('option');
+      option.value = options[i];
+      option.textContent = options[i];
+      select.appendChild(option);
+    }
+    return select;
+}
+
+function createRadioOrCheckBox(type, options, id, parentNode) {
+  for (let i = 0, len = options.length; i < len; i++) {
+    let input = document.createElement('input');
+    let label = document.createElement('label');
+    input.type = type;
+    input.value = options[i];
+    input.name = type + id;
+    label.textContent = options[i];
+    parentNode.appendChild(input);
+    parentNode.appendChild(label);
+  }
 }
 
 function addInput() {
@@ -141,7 +190,9 @@ function addInput() {
   //生成Input
   let input = createInput(config);
   //插入到DOM中
-  $('main').insertBefore(input, submit_form_btn);
+  if (input) {
+    $('main').insertBefore(input, submit_form_btn);
+  }
 }
 
 //绑定事件
@@ -150,3 +201,4 @@ option_input.addEventListener('keyup', addOptions);
 show_options_div.addEventListener('mouseenter', showDeleteOption, true);
 show_options_div.addEventListener('mouseleave', showNormalOption, true);
 show_options_div.addEventListener('click', deleteOption);
+add_input_btn.addEventListener('click', addInput);
