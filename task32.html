@@ -2,139 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Task32</title>
-    <style>
-        *{
-            margin:0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        button{
-            width:80px;
-            padding: 10px 15px;
-            background:#337ab7;
-            color: #fff;
-            font-size:16px;
-            border: none;
-            border-radius: 5px;
-        }
-        .container{
-            width: 80%;
-            margin: 20px auto;
-            display: flex;
-        }
-        aside{
-            width:30%;
-            margin-right: 20px;
-        }
-        fieldset{
-            padding:10px;
-            margin-bottom: 20px;
-        }
-        label{
-            width: 30%;
-            display: inline-block;
-            margin-bottom: 5px;
-        }
-        main{
-            width:70%;
-            padding: 20px 10px;
-            border: 1px solid #222;
-            border-radius:5px;
-        }
-        main h4 {
-            text-align: center;
-        }
-       .options{
-            display: none;
-        }
-        .option{
-            display: inline-block;
-            padding: 5px 10px;
-            color: #fff;
-            background: indianred;
-            margin: 5px;
-        }
-        .delete-option{
-            background: dodgerblue;
-        }
-    </style>
+    <title>Task 32</title>
+    <link rel="stylesheet" href="css/task32.css">
 </head>
 <body>
     <div class="container">
-        <aside>
-            <form action="">
-                <fieldset class="input-type">
-                    <legend>类型</legend>
-                    <label>
-                        <input type="radio" name="inputType" value="输入框" checked> 输入框
-                    </label>
-                    <label>
-                        <input type="radio" name="inputType" value="单选框"> 单选框
-                    </label>
-                    <label>
-                        <input type="radio" name="inputType" value="多选框"> 多选框
-                    </label>
-                    <label>
-                        <input type="radio" name="inputType" value="下拉框"> 下拉框
-                    </label>
-                    <label>
-                        <input type="radio" name="inputType" value="文本域"> 文本域
-                    </label>
-                </fieldset>
-                <fieldset class="config">
-                    <legend>配置</legend>
-                    <label>
-                        名称：<input type="text" value="名称" id="labelName">
-                    </label>
-                    <br>
-                    <label>
-                        <input type="radio" name="rules" value="必填" checked> 必填
-                    </label>
-                    <label>
-                        <input type="radio" name="rules" value="选填"> 选填
-                    </label>
-                </fieldset>
-                <fieldset class="settings">
-                    <legend>规则</legend>
-                    <label>
-                        <input type="radio" name="settings" value="text" checked> 文字
-                    </label>
-                    <label>
-                        <input type="radio" name="settings" value="number"> 数字
-                    </label>
-                    <label>
-                        <input type="radio" name="settings" value="email"> 邮箱
-                    </label>
-                    <label>
-                        <input type="radio" name="settings" value="phone"> 电话号码
-                    </label>
-                    <label>
-                        <input type="radio" name="settings" value="password"> 密码
-                    </label>
-                </fieldset>
-                <fieldset class="options">
-                    <legend>选项</legend>
-                    <label>
-                        <input type="text" id="addOptions">
-                    </label>
-                    <div class="show-options"></div>
-                </fieldset>
-                <fieldset class="length-limitation">
-                    <legend>长度限制</legend>
-                    <label>
-                        字符范围:
-                        <input type="number" value="4" id="lowLength"> - <input type="number" value="16" id="highLength">
-                    </label>
-                </fieldset>
-            </form>
-            <button id="addInput">Add</button>
+        <aside class="options">
+            <label>
+                <input type="checkbox" name="type" value="name" class="input-type">名称
+            </label>
+            <label>
+                <input type="checkbox" name="type" value="password" class="input-type">密码
+            </label>
+            <label>
+                <input type="checkbox" name="type" value="email" class="input-type">邮箱
+            </label>
+            <label>
+                <input type="checkbox" name="type" value="phone" class="input-type">电话
+            </label>
+
+            <br>
+            <label>
+                <input type="radio" name="style" value="style1">样式一
+            </label>
+            <label>
+                <input type="radio" name="style" value="style2">样式二
+            </label>
+
+            <div class="name-config">
+                <label for="nameLabel">Label名称:</label>
+                <input type="text" id="nameLabel" value="名称">
+                <br>
+                <label for="textLen">字符限制:</label><br>
+                <input type="number" class="name-length" value="4"> - <input type="number" class="name-length" value="16">个字符
+            </div>
+            <br>
+            <button id="create-form-btn">生成表单</button>
         </aside>
+
         <main>
-            <h4>表单展示</h4>
-            <button id="submitFormBtn">提交</button>
+            <h3>表单展示区</h3>
         </main>
     </div>
-    <script src="js/task32/task32.js"></script>
+
+    <script src="js/task32.js"></script>
 </body>
 </html>
