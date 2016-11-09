@@ -8,40 +8,38 @@
 <body>
     <div class="container">
         <aside class="options">
-            <label>
-                <input type="checkbox" name="type" value="name" class="input-type">名称
-            </label>
-            <label>
-                <input type="checkbox" name="type" value="password" class="input-type">密码
-            </label>
-            <label>
-                <input type="checkbox" name="type" value="email" class="input-type">邮箱
-            </label>
-            <label>
-                <input type="checkbox" name="type" value="phone" class="input-type">电话
-            </label>
+            <div class="form-elems">
+                <label>
+                    <input type="checkbox" name="type" value="name" class="input-type">名称
+                </label>
+                <label>
+                    <input type="checkbox" name="type" value="password" class="input-type">密码
+                </label>
+                <label>
+                    <input type="checkbox" name="type" value="email" class="input-type">邮箱
+                </label>
+                <label>
+                    <input type="checkbox" name="type" value="phone" class="input-type">电话
+                </label>
+            </div>
 
             <br>
-            <label>
-                <input type="radio" name="style" value="style1">样式一
-            </label>
-            <label>
-                <input type="radio" name="style" value="style2">样式二
-            </label>
-
-            <div class="name-config">
-                <label for="nameLabel">Label名称:</label>
-                <input type="text" id="nameLabel" value="名称">
-                <br>
-                <label for="textLen">字符限制:</label><br>
-                <input type="number" class="name-length" value="4"> - <input type="number" class="name-length" value="16">个字符
+            <div class="styles">
+                <label>
+                    <input type="radio" name="form-style" value="normal-form" checked>样式一
+                </label>
+                <label>
+                    <input type="radio" name="form-style" value="inline-form">样式二
+                </label>
             </div>
+
             <br>
             <button id="create-form-btn">生成表单</button>
         </aside>
 
         <main>
             <h3>表单展示区</h3>
+            <form action="" id="final-form"></form>
         </main>
     </div>
 
