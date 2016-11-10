@@ -8,17 +8,19 @@ var name_input = $('.name');
 var name_config = {
   label: '名称',                    // 表单标签
   type: 'input',                   // 表单类型
-  validator: function () {},    // 表单验证规
+  validator: function (value) {
+    return /^[a-zA-z0-9]{4,16}$/.test(value);
+  },    // 表单验证规
   rules: '必填，长度为4-16个字符',    // 填写规则提示
   success: '格式正确',              // 验证通过提示
-  fail: '名称不能为空'               // 验证失败提示
+  fail: '名称长度为4-16个字符'               // 验证失败提示
 }
 
 var psd_config = {
   label: '密码',
   type: 'password',
-  validator: function () {
-
+  validator: function (value) {
+    return /^[a-zA-z0-9]{4,16}$/.test(value);
   },
   rules: '必填，长度为4-16个字符',
   success: '格式正确',
@@ -28,8 +30,8 @@ var psd_config = {
 var email_config = {
   label: '邮箱',
   type: 'email',
-  validator: function () {
-
+  validator: function (value) {
+    return /([a-zA-Z0-9_-])+@([a-zA-Z0-9])+\.([a-zA-Z]{2,3})/.test(value);
   },
   rules: '必填，输入合法邮箱',
   success: '格式正确',
@@ -37,9 +39,10 @@ var email_config = {
 }
 
 var phone_config = {
-  label: '邮箱',
+  label: '电话',
   type: 'number',
-  validator: function () {
+  validator: function (value) {
+    return /^[1][0-9]{10}$/.test(value)
   },
   rules: '必填，输入合法手机号',
   success: '格式正确',
@@ -72,11 +75,33 @@ function createInput(config) {
   let div = document.createElement('div');
   let label = document.createElement('label');
   let input = document.createElement('input');
+  let p = document.createElement('p');
   div.className = 'form-control';
   label.textContent = config.label;
   input.type = config.type;
+  p.textContent = config.rules;
+  p.className = 'rules';
+  p.style.display = 'none';
   div.appendChild(label);
   div.appendChild(input);
+  div.appendChild(p);
+  input.addEventListener('focus', function (e) {
+    e.target.nextElementSibling.style.display = 'block';
+  });
+  input.addEventListener('blur', function (e) {
+    let target = e.target;
+    let info = target.nextElementSibling;
+    let isValid = config.validator(target.value);
+    if (isValid) {
+      info.textContent = config.success;
+      info.className = 'success';
+      input.className = 'success';
+    } else {
+      info.textContent = config.fail;
+      info.className = 'error';
+      target.className = 'error';
+    }
+  });
   return div;
 }
 
@@ -94,6 +119,10 @@ function createFormElems() {
     let curr_input = createInput(inputs_config[curr_input_type]);
     final_form.appendChild(curr_input);
   }
+  var submit_btn = document.createElement('button');
+  submit_btn.textContent = '提交';
+  submit_btn.className = 'btn';
+  final_form.appendChild(submit_btn);
 }
 //事件绑定
 create_form_btn.addEventListener('click', createFormElems)

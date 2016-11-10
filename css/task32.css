@@ -39,6 +39,56 @@ main {
 main h3{
     text-align: center;
 }
+main form{
+    width:80%;
+    margin: 20px auto;
+}
+.form-control{
+    margin-bottom: 15px;
+}
+.form-control p{
+    color: #999;
+}
+.form-control p.success{
+    color: green;
+}
+.form-control p.error{
+    color: red;
+}
+.form-control input.success{
+    border-color: green;
+}
+.form-control input.error{
+    border-color: red;
+}
+.inline-form .form-control p{
+    margin-left: 12%;
+}
+.normal-form .form-control label{
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.inline-form .form-control label{
+    width:10%;
+    display: inline-block;
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+}
+.form-control input{
+    width: 80%;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
 
-
-
+.btn{
+    width:100px;
+    padding: 10px 15px;
+    background:#337ab7;
+    color: #fff;
+    font-size:16px;
+    border: none;
+    border-radius: 5px;
+}
