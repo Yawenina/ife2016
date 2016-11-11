@@ -92,6 +92,7 @@ function createInput(config) {
     let target = e.target;
     let info = target.nextElementSibling;
     let isValid = config.validator(target.value);
+    input.dataset.validation = isValid;
     if (isValid) {
       info.textContent = config.success;
       info.className = 'success';
@@ -122,7 +123,19 @@ function createFormElems() {
   var submit_btn = document.createElement('button');
   submit_btn.textContent = '提交';
   submit_btn.className = 'btn';
+  submit_btn.addEventListener('click', validation);
   final_form.appendChild(submit_btn);
 }
+
+function validation() {
+  event.preventDefault();
+  let inputs = document.forms[0];
+  for (let i = 0, len = inputs.length -1; i < len; i++) {
+    if (inputs[i].dataset.validation == 'false') {
+      alert('有不合法字段');
+      break;
+    }
+  }
+}
 //事件绑定
-create_form_btn.addEventListener('click', createFormElems)
+create_form_btn.addEventListener('click', createFormElems);
