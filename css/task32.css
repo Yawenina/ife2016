@@ -62,7 +62,7 @@ main form{
     border-color: red;
 }
 .inline-form .form-control p{
-    margin-left: 12%;
+    margin-left: 18%;
 }
 .normal-form .form-control label{
     display: block;
@@ -70,14 +70,14 @@ main form{
     font-weight: bold;
 }
 .inline-form .form-control label{
-    width:10%;
+    width:15%;
     display: inline-block;
     text-align: right;
     margin-right: 10px;
     font-weight: bold;
 }
 .form-control input{
-    width: 80%;
+    width: 70%;
     border-radius: 5px;
     border: 1px solid #ddd;
     padding: 10px;

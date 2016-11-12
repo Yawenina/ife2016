@@ -6,7 +6,7 @@ var create_form_btn = $('#create-form-btn');
 var form_elems_div = $('.form-elems');
 var name_input = $('.name');
 var name_config = {
-  label: '名称',                    // 表单标签
+  label: '名称', // 表单标签
   type: 'input',                   // 表单类型
   validator: function (value) {
     return /^[a-zA-z0-9]{4,16}$/.test(value);
@@ -27,6 +27,18 @@ var psd_config = {
   fail: '长度为4-16个字符'
 }
 
+var confirm_psd_config = {
+  label: '确认密码',
+  type: 'password',
+  validator: function (value) {
+    let psd = event.target.parentNode.previousElementSibling.children[1].value;
+    console.log(psd, value)
+    return value && psd === value;
+  },
+  rules: '必填，长度为4-16个字符',
+  success: '密码输入一致',
+  fail: '密码输入不一致'
+}
 var email_config = {
   label: '邮箱',
   type: 'email',
@@ -52,6 +64,7 @@ var phone_config = {
 var inputs_config = {
   name: name_config,
   password: psd_config,
+  confirm_psd: confirm_psd_config,
   email: email_config,
   phone: phone_config
 }
@@ -79,6 +92,7 @@ function createInput(config) {
   div.className = 'form-control';
   label.textContent = config.label;
   input.type = config.type;
+  input.id = config.label;
   p.textContent = config.rules;
   p.className = 'rules';
   p.style.display = 'none';
@@ -119,6 +133,10 @@ function createFormElems() {
     let curr_input_type = form_elems[i];
     let curr_input = createInput(inputs_config[curr_input_type]);
     final_form.appendChild(curr_input);
+    if (curr_input_type === 'password') {
+      var confirm_psd_input = createInput(inputs_config.confirm_psd);
+      final_form.appendChild(confirm_psd_input);
+    }
   }
   var submit_btn = document.createElement('button');
   submit_btn.textContent = '提交';
@@ -133,9 +151,10 @@ function validation() {
   for (let i = 0, len = inputs.length -1; i < len; i++) {
     if (inputs[i].dataset.validation == 'false') {
       alert('有不合法字段');
-      break;
+      return;
     }
   }
+  alert('提交成功！');
 }
 //事件绑定
 create_form_btn.addEventListener('click', createFormElems);
