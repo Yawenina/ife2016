@@ -7,11 +7,24 @@
         *{
             margin:0;
             padding: 0;
+            box-sizing: border-box;
         }
         .container{
             width:500px;
             margin:30px auto;
             text-align: center;
+            position: relative;
+        }
+        .block{
+            position: absolute;
+            width:40px;
+            height:40px;
+            background: red;
+        }
+        .blue{
+            width:100%;
+            height: 10px;
+            background:blue;
         }
         .commander{
             margin-top:20px;
@@ -41,10 +54,16 @@
         table tr td:first-child{
             border:none;
         }
+        table td.active{
+            background:red;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="block">
+            <div class="blue"></div>
+        </div>
         <table cellspacing="0" border="0">
             <tr>
                 <td></td>
@@ -192,8 +211,9 @@
         </table>
         <div class="commander">
             <input type="text">
-            <button>执行</button>
+            <button id="execute">执行</button>
         </div>
     </div>
+    <script src="js/task33.js"></script>
 </body>
 </html>
