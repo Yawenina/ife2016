@@ -67,7 +67,13 @@ function getCommand() {
   }
 }
 
+function inputHandler(e) {
+  if (e.keyCode ===  13) {
+    getCommand();
+  }
+}
 submitBtn.addEventListener('click', getCommand);
+input.addEventListener('keyup', inputHandler);
 
 window.onload = function () {
   initPosition();
