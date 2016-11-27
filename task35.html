@@ -33,7 +33,7 @@
       height: 10px;
       background:blue;
     }
-    .commander{
+    .submit-btn{
       margin-top:20px;
     }
     button{
@@ -64,7 +64,7 @@
     table td.active{
       background:red;
     }
-    #command-input{
+    .command{
       display: flex;
       margin-top:15px;
     }
@@ -75,8 +75,9 @@
     .line-number li{
       padding-left: 10px;
       padding-right: 10px;
+      text-align: center;
     }
-    #command-input textarea{
+    .command-area{
       background: #000;
       color: #1D631B;
       font-size: 16px;
@@ -100,16 +101,11 @@
       <li>MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格</li>
     </ul>
     
-    <div id="command-input">
+    <div class="command">
       <ol class="line-number">
         <li>1</li>
-        <li>2</li>
-        <li>3</li>
       </ol>
-      <textarea name="" id="" cols="30" rows="10">
-        some text <br>
-        other text
-      </textarea>
+      <textarea name="" id="" cols="30" rows="10" class="command-area"></textarea>
     </div>
     
   </div>
@@ -262,8 +258,7 @@
         <td></td>
       </tr>
     </table>
-    <div class="commander">
-      <input type="text" id="command">
+    <div class="submit-btn">
       <button id="execute">执行</button>
       <button id="refresh">Refresh</button>
     </div>
