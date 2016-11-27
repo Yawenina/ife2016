@@ -27,7 +27,7 @@ function changeDirection() {
   block.style.transform = "rotate(" + pos.direction + "deg)";
 }
 
-function getCommand() {
+function execCommand() {
   let command = input.value.toUpperCase();
   switch (command) {
     case 'TUN LEF':
@@ -69,10 +69,11 @@ function getCommand() {
 
 function inputHandler(e) {
   if (e.keyCode ===  13) {
-    getCommand();
+    execCommand();
   }
 }
-submitBtn.addEventListener('click', getCommand);
+
+submitBtn.addEventListener('click', execCommand);
 input.addEventListener('keyup', inputHandler);
 
 window.onload = function () {
