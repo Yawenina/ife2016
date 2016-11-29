@@ -16,6 +16,10 @@ function setLineNumber(e) {
   }
 }
 
+function setLineNumberScroll(e) {
+  line_number_elem.scrollTop = e.target.scrollTop;
+}
+
 function clearCommandArea() {
   command_area.value = '';
   line_number_elem.innerHTML = '';
@@ -53,5 +57,6 @@ function validateCommand() {
 }
 
 command_area.addEventListener('keyup', setLineNumber);
+command_area.addEventListener('scroll', setLineNumberScroll);
 exec_command_btn.addEventListener('click', validateCommand);
 refresh_btn.addEventListener('click', clearCommandArea);
