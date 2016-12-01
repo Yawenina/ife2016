@@ -15,7 +15,7 @@ let directions = {
   'RIG': 1,
   'BOT': 2,
   'LEF': 3
-}
+};
 let pos = {
   row: 1,
   col: 10,
@@ -47,6 +47,9 @@ function setLineNumber(e) {
       let lastChild = line_number_elem.lastElementChild;
       line_number_elem.removeChild(lastChild);
     }
+    if (line_number_elem.children.length == 1) {
+      line_number_elem.children[0].className = ''
+    }
   }
 }
 
@@ -68,11 +71,9 @@ function validateCommand() {
   let command_arr = command_area.value.split('\n');
   for(let i = 0; i < command_arr.length; i++) {
     let curr_command = command_arr[i].toUpperCase().split(' ');
-    console.log(curr_command)
     let curr_number_elem = line_number_elem.children[i];
     curr_number_elem.className = '';
     if (/[^TRA|MOV|GO]/gi.test(curr_command[0])) {
-      console.log(1)
       curr_number_elem.className = 'error-command';
       isValidate = false;
       continue;
