@@ -68,15 +68,17 @@ function validateCommand() {
   let command_arr = command_area.value.split('\n');
   for(let i = 0; i < command_arr.length; i++) {
     let curr_command = command_arr[i].toUpperCase().split(' ');
+    console.log(curr_command)
     let curr_number_elem = line_number_elem.children[i];
     curr_number_elem.className = '';
     if (/[^TRA|MOV|GO]/gi.test(curr_command[0])) {
+      console.log(1)
       curr_number_elem.className = 'error-command';
       isValidate = false;
       continue;
     }
     if (curr_command[0] === 'GO') {
-      if (/[^0-9]/.test(curr_command[1]) || curr_command.length > 2) {
+      if ((curr_command[1] && /[^0-9]/.test(curr_command[1])) || curr_command.length > 2) {
         curr_number_elem.className = 'error-command';
         isValidate = false;
       }
@@ -120,7 +122,7 @@ function changePos(direction, step) {
 }
 
 function changeDirection(direction) {
-  pos.direction = directions[direction]
+  pos.direction = directions[direction];
   block.style.transform = block.style.transform = "rotate(" + pos.direction * 90 + "deg)";
 }
 
