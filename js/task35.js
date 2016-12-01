@@ -1,9 +1,6 @@
 /**
  * Created by yawenina on 11/27/16.
  */
-
-// TODO: delete error line and add per animation
-
 let line_number = 0;
 let command_area = document.querySelector('.command-area');
 let line_number_elem = document.querySelector('.line-number');
@@ -66,9 +63,9 @@ function clearCommandArea() {
   line_number_elem.appendChild(li);
 }
 
-function validateCommand() {
+function validateCommand(commands) {
   let isValidate = true;
-  let command_arr = command_area.value.split('\n');
+  let command_arr = commands;
   for(let i = 0; i < command_arr.length; i++) {
     let curr_command = command_arr[i].toUpperCase().split(' ');
     let curr_number_elem = line_number_elem.children[i];
@@ -101,6 +98,7 @@ function validateCommand() {
 }
 
 function changePos(direction, step) {
+  step = parseInt(step);
   switch(direction) {
     case 0:
       pos.row = pos.row - step < 1 ? 1 : pos.row - step;
@@ -119,7 +117,6 @@ function changePos(direction, step) {
     block.style.top = pos.row * 40 + 'px';
     block.style.left = pos.col * 40 + 'px';
   })
-
 }
 
 function changeDirection(direction) {
@@ -127,37 +124,48 @@ function changeDirection(direction) {
   block.style.transform = block.style.transform = "rotate(" + pos.direction * 90 + "deg)";
 }
 
-function setPosition() {
-  let commands = command_area.value.split('\n');
-  commands.forEach(function (item) {
-    let item_split = item.split(' ');
-    let step = 0;
-    switch (item_split[0]) {
-      case 'GO':
-        step = item_split[1] ? item_split[1] : 1;
-        changePos(pos.direction, step);
-        break;
-      case 'TRA':
-        step = item_split[2] ? item_split[2] : 1;
-        changePos(directions[item_split[1]], step);
-        break;
-      case 'MOV':
-        step = item_split[2] ? item_split[2] : 1;
-        changeDirection(item_split[1]);
-        changePos(pos.direction, step);
-        break;
-    }
-  });
+function setPosition(command) {
+  let command_split = command.split(' ');
+  let step = 0;
+  switch (command_split[0]) {
+    case 'GO':
+      step = command_split[1] ? command_split[1] : 1;
+      changePos(pos.direction, step);
+      break;
+    case 'TRA':
+      step = command_split[2] ? command_split[2] : 1;
+      changePos(directions[command_split[1]], step);
+      break;
+    case 'MOV':
+      step = command_split[2] ? command_split[2] : 1;
+      changeDirection(command_split[1]);
+      changePos(pos.direction, step);
+      break;
+  }
 };
 
 function execCommand() {
+  let commands = command_area.value.trim().toUpperCase().split('\n');
   //检查指令是否合法
-  let isValidate = validateCommand();
-  if (isValidate) {
-    //执行指令
-    setPosition();
-  } else {
-    return false;
+  if (commands) {
+    let isValidate = validateCommand(commands);
+    if (isValidate) {
+      //执行指令
+      setPosition(commands[0]);
+      let i = 1;
+      let commands_len = commands.length;
+      var timer = setInterval(function () {
+        if (i >=  commands_len) {
+          clearInterval(timer);
+          return false;
+        } else {
+          setPosition(commands[i]);
+          i++;
+        }
+      }, 1000);
+    } else {
+      return false;
+    }
   }
 }
 
