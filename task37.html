@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 37</title>
+  <style>
+    html, body{
+      height:100%;
+    }
+    .container{
+      width:60%;
+      margin:50px auto;
+    }
+    .modal-container{
+      position: fixed;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      background: rgba(102,102,102,.9);
+    }
+    .modal-wrapper{
+      position: fixed;
+      margin: 0 auto;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid #000000;
+      background: #fff;
+    }
+    .modal-lg .modal-wrapper{
+      width:80%;
+    }
+    .modal-sm .modal-wrapper{
+      width:40%;
+    }
+    .modal-header{
+      padding:10px 15px;
+      color: #ffffff;
+      font-size: 1.2em;
+      font-weight:bold;
+      background: #666666;
+    }
+    .modal-body{
+      padding:10px 15px;
+    }
+    .modal-footer{
+      text-align: right;
+      padding: 10px 5px;
+    }
+    .btn{
+      padding:10px 25px;
+      border-color: #000;
+      background: #666666;
+      color: #fff;
+      margin-right:10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>UI浮出层</h1>
+    <p>使用说明：</p>
+    <ul>
+        <li>浮出层的中心默认在屏幕正中</li>
+        <li>当浮出层显示时，屏幕滚动时，浮出层始终保持位置固定在屏幕正中，不随屏幕滚动而变化位置。或者禁止页面在有浮出层出现时滚动</li>
+        <li>当浮出层显示时，点击浮出层以外的部分，默认为关闭浮出层。可以实现一个半透明的遮罩来挡住浮出层外的部分</li>
+        <li>浮出层的样式、内容和逻辑尽量解耦</li>
+        <li>提供使用JavaScript控制浮出层展现和关闭的接口</li>
+        <li>浮出层的窗口大小可以是一个默认固定值，也可以是随内容变化而自适应变化，也可以是通过接口参数进行调整，自行根据自己能力进行选择</li>
+        <li>有能力的同学可以实现浮出层的拖拽移动浮出窗口位置以及拖拽边缘来放大缩小浮出窗口的功能</li>
+    </ul>
+    
+    <div class="modal-lg modal-container">
+      <div class="modal-wrapper">
+        <div class="modal-header">这是一个浮出层</div>
+        <div class="modal-body">这是一个浮出层</div>
+        <div class="modal-footer">
+          <button class="modal-cancel-btn btn">取消</button>
+          <button class="modal-submit-btn btn">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/task37.js"></script>
+</body>
+</html>
