@@ -63,7 +63,12 @@
     <h1>UI浮出层</h1>
     <button class="btn" data-target="#example-modal-lg" data-toggle="modal">Show Large Modal</button>
     <button class="btn" data-target="#example-modal-sm" data-toggle="modal">Show Small Modal</button>
-    <p>使用说明：</p>
+    <p>使用说明</p>
+    <ul>
+      <li>触发弹出浮出层的元素需要 data-toggle='modal', data-target值为浮出层的最外层modal-container</li>
+      <li>浮出层中关闭浮出层的按钮需要 data-dismiss='modal'属性</li>
+    </ul>
+    <p>任务说明：</p>
     <ul>
         <li>浮出层的中心默认在屏幕正中</li>
         <li>当浮出层显示时，屏幕滚动时，浮出层始终保持位置固定在屏幕正中，不随屏幕滚动而变化位置。或者禁止页面在有浮出层出现时滚动</li>
