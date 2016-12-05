@@ -18,6 +18,7 @@
       right:0;
       bottom:0;
       background: rgba(102,102,102,.9);
+      display: none;
     }
     .modal-wrapper{
       position: fixed;
@@ -60,6 +61,8 @@
 <body>
   <div class="container">
     <h1>UI浮出层</h1>
+    <button class="btn" data-target="#example-modal-lg" data-toggle="modal">Show Large Modal</button>
+    <button class="btn" data-target="#example-modal-sm" data-toggle="modal">Show Small Modal</button>
     <p>使用说明：</p>
     <ul>
         <li>浮出层的中心默认在屏幕正中</li>
@@ -71,16 +74,34 @@
         <li>有能力的同学可以实现浮出层的拖拽移动浮出窗口位置以及拖拽边缘来放大缩小浮出窗口的功能</li>
     </ul>
     
-    <div class="modal-lg modal-container">
+    <div class="modal-lg modal-container" id="example-modal-lg">
       <div class="modal-wrapper">
-        <div class="modal-header">这是一个浮出层</div>
-        <div class="modal-body">这是一个浮出层</div>
+        <div class="modal-header">这是一个大的浮出层</div>
+        <div class="modal-body">
+          萨伦伯格，被誉为缔造了“哈得孙河奇迹”的传奇机长，2009年1月15日，他将引擎熄火的飞机成功迫降于哈得孙河上，机上155名乘客和机组人员全部幸免遇难。他那漂亮的行动不仅避免了灾难的发生，同时也让他成了世人眼中的英雄，同时再次点燃了人们对于生活的激情。
+          《最高职责》讲述了传奇机长切斯利·萨伦伯格的故事，一个充满了奉献精神、希望以及时刻准备着接受挑战的故事。书中讲述了萨伦伯格孩童时期、在空军服役期间以及成为民航业一名机长时的非凡飞行经历与生活中的点点滴滴以及从中学到的人生哲理。萨伦伯格的故事提醒我们，即使在充斥着战争以及经济不确定性的时期，仍然有值得我们去奋斗的事情——那就是我们要时刻准备着迎接生命中随时会出现的挑战。
+        </div>
         <div class="modal-footer">
-          <button class="modal-cancel-btn btn">取消</button>
+          <button class="modal-cancel-btn btn" data-dismiss="modal">取消</button>
           <button class="modal-submit-btn btn">确定</button>
         </div>
       </div>
     </div>
+
+    <div class="modal-sm modal-container" id="example-modal-sm">
+      <div class="modal-wrapper">
+        <div class="modal-header">这是一个小的浮出层</div>
+        <div class="modal-body">
+          切斯利·萨伦伯格——切斯利·萨伦伯格机长是一名航空公司的飞行员和安全专家，曾任飞行教员、航空公司飞行员协会安全主席及事故调查员。在美国空军学院毕业时获得优秀空军士兵学员奖，拥有双硕士学位。2009年他因成功将一架受到鸟击而双发失效的飞机迫降哈得孙河，且机上人员全部幸存而在世界范围内备受敬重 。
+          杰夫·扎斯洛——杰夫·扎斯洛为《华尔街日报》专栏作家，与兰迪·鲍许共同创作了最佳国际畅销书《最后的演讲》，该书已被译为46种语言。扎斯洛同时还是《纽约时报》畅销书《来自埃姆斯的女孩们》的作者。
+        </div>
+        <div class="modal-footer">
+          <button class="modal-cancel-btn btn" data-dismiss="modal">取消</button>
+          <button class="modal-submit-btn btn">确定</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script src="js/task37.js"></script>
