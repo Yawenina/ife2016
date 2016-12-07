@@ -24,6 +24,12 @@ function sortedTable(wrapperSelector, options) {
   this.tbody = null;
 }
 
+function bindEvent(elem, type) {
+  if (type === 'asc') {
+    elem.addEventListener('click')
+  }
+}
+
 function createBasicTable() {
   let table = document.createElement('table');
   let thead = document.createElement('thead');
@@ -57,20 +63,17 @@ function createBasicTable() {
 }
 
 function renderTbody(data) {
-  for (let key in data) {
+  data.forEach(row => {
     let tr = document.createElement('tr');
     let fragment = document.createDocumentFragment();
-    let td = document.createElement('td');
-    td.textContent = key;
-    fragment.appendChild(td);
-    data[key].forEach(function (item) {
+    row.forEach(col => {
       let td = document.createElement('td');
-      td.textContent = item;
+      td.textContent = col;
       fragment.appendChild(td);
-    });
+    })
     tr.appendChild(fragment);
     this.tbody.appendChild(tr);
-  }
+  })
 }
 
 function init() {
@@ -88,10 +91,10 @@ sortedTable.prototype = {
 
 new sortedTable('.container', {
   thead: ['姓名', '语文', '数学', '英语', '总分'],
-  data: {
-    '小红': [80, 81, 82, 83],
-    '小明': [85, 72, 93, 100],
-    '小黄': [99, 98, 96, 95]
-  },
+  data: [
+    ['小红', 80, 81, 82, 83],
+    ['小明', 85, 72, 93, 100],
+    ['小黄', 99, 98, 96, 95]
+  ],
   sortCols: ['语文', '总分']
 }).init();
