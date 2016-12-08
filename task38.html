@@ -13,6 +13,11 @@
       text-align: center;
       border-collapse: collapse;
     }
+    table thead.frozen{
+      position: fixed;
+      top:0;
+      display: table;
+    }
     table  td,
     table th {
       padding: 6px 12px;
@@ -57,11 +62,18 @@
           isTheadFrozen: true //是否冻结表格首行
         }
       </pre>
-      <h2>例子：</h2>
+      <div class="table-example"></div>
+      <h2>以上表格的配置如下：</h2>
       <pre>
         new sortedTable('.container', {
           thead: ['姓名', '语文', '数学', '英语', '总分'],
           data: [
+            ['小红', 80, 81, 82, 83],
+            ['小明', 99, 72, 93, 100],
+            ['小黄', 85, 98, 96, 95],
+            ['小红', 80, 81, 82, 83],
+            ['小明', 99, 72, 93, 100],
+            ['小黄', 85, 98, 96, 95],
             ['小红', 80, 81, 82, 83],
             ['小明', 99, 72, 93, 100],
             ['小黄', 85, 98, 96, 95]

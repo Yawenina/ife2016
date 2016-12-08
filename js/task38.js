@@ -7,10 +7,11 @@ function $(selector) {
 
 function sortedTable(wrapperSelector, options) {
   this.wrapperElem = $(wrapperSelector);
-  this.thead = options.thead;
+  this.theadCols = options.thead;
   this.data = options.data;
   this.sortCols = options.sortCols;
-  this.handlerFn = options.handlerFn
+  this.handlerFn = options.handlerFn;
+  this.isTheadFrozen = options.isTheadFrozen;
   this.table = null;
   this.tbody = null;
   this.init()
@@ -43,10 +44,10 @@ function createBasicTable() {
   table.appendChild(thead);
   table.appendChild(tbody);
 
-  for (let i = 0; i < this.thead.length; i++) {
+  for (let i = 0; i < this.theadCols.length; i++) {
     let th = document.createElement('th');
-    th.textContent = this.thead[i];
-    if (this.sortCols.indexOf(this.thead[i]) !== -1) {
+    th.textContent = this.theadCols[i];
+    if (this.sortCols.indexOf(this.theadCols[i]) !== -1) {
       let div = document.createElement('div');
       div.className = 'sort-arrow-wrapper';
       let ascSpan = document.createElement('span');
@@ -73,6 +74,7 @@ function createBasicTable() {
   }
 
   this.table = table;
+  this.thead = thead;
   this.tbody = tbody;
   this.wrapperElem.appendChild(table);
 }
@@ -92,9 +94,41 @@ function renderTbody(data) {
   })
 }
 
+function getTableOffsetTop() {
+  let elem = this.table;
+  let tableWidth = elem.offsetWidth;
+  let topPos = 0;
+  let bottomPos = 0;
+  while (elem.offsetParent) {
+    topPos += elem.offsetTop;
+    elem = elem.offsetParent;
+  }
+  bottomPos = topPos + this.tbody.offsetHeight;
+  return {
+    tableWidth,
+    topPos,
+    bottomPos
+  }
+}
+
+function FrozenThead(top, bottom, width) {
+  console.log(width)
+  let windowOffset = window.pageYOffset;
+  if (windowOffset >= top && windowOffset <= bottom) {
+    this.thead.style.width = width + 'px';
+    this.thead.className = 'frozen';
+  } else {
+    this.thead.className = '';
+  }
+}
+
 function init() {
   this.createBasicTable();
   this.renderTbody(this.data);
+  if (this.isTheadFrozen) {
+    let pos = this.getTableOffsetTop();
+    window.onscroll = FrozenThead.bind(this, pos.topPos, pos.bottomPos, pos.tableWidth);
+  }
 }
 
 
@@ -104,12 +138,22 @@ sortedTable.prototype = {
   renderTbody,
   init,
   bindEvent,
-  sortColsFn
+  sortColsFn,
+  getTableOffsetTop
 }
 
-new sortedTable('.container', {
+new sortedTable('.table-example', {
   thead: ['姓名', '语文', '数学', '英语', '总分'],
   data: [
+    ['小红', 80, 81, 82, 83],
+    ['小明', 99, 72, 93, 100],
+    ['小黄', 85, 98, 96, 95],
+    ['小红', 80, 81, 82, 83],
+    ['小明', 99, 72, 93, 100],
+    ['小黄', 85, 98, 96, 95],
+    ['小红', 80, 81, 82, 83],
+    ['小明', 99, 72, 93, 100],
+    ['小黄', 85, 98, 96, 95],
     ['小红', 80, 81, 82, 83],
     ['小明', 99, 72, 93, 100],
     ['小黄', 85, 98, 96, 95]
