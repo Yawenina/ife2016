@@ -1,16 +1,6 @@
 /**
  * Created by yawenina on 12/6/16.
  */
-// var options = {
-//   'thead': [],
-//   data: {
-//     [],
-//     []
-//   },
-//   sortWay: 'asc | dsc',
-//   sortCols: []
-// }
-
 function $(selector) {
   return document.querySelector(selector);
 }
@@ -23,6 +13,7 @@ function sortedTable(wrapperSelector, options) {
   this.handlerFn = options.handlerFn
   this.table = null;
   this.tbody = null;
+  this.init()
 }
 
 function sortColsFn(type, col, e){
@@ -37,11 +28,6 @@ function sortColsFn(type, col, e){
     this.renderTbody(this.data)
   }
 }
-
-
-// function bindEvent(elem, type, col) {
-//   elem.addEventListener('click', sortCol(type, col).bind(this));
-// }
 
 function bindEvent(elem, fn) {
   elem.addEventListener('click', fn.bind(this));
@@ -128,6 +114,7 @@ new sortedTable('.container', {
     ['小明', 99, 72, 93, 100],
     ['小黄', 85, 98, 96, 95]
   ],
-  sortCols: ['语文', '总分', '数学', '英语'],
-  handlerFn: []
-}).init();
+  sortCols: ['语文', '总分', '英语'],
+  handlerFn: [],
+  isTheadFrozen: true
+});

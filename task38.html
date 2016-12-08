@@ -17,6 +17,7 @@
     table th {
       padding: 6px 12px;
       border: 1px solid black;
+      width: 50px;
     }
     table th{
       background: #606060;
@@ -41,7 +42,36 @@
 </head>
 <body>
   <div class="container">
-
+    <div class="instructor">
+      <h1>冻结排序行列表格</h1>
+      <h2>使用说明：</h2>
+      <pre>
+        new sortedTable(wrapperSelector, options);
+        options = {
+          thead: [], //数组，表头
+          data: [
+            [],[]
+          ], //数组元素为数组，包括每行各列的数据
+          sortCols: [], //需要排序的列名
+          handlerFn: [], //数组元素为函数，分别对应向上，向下箭头的操作函数
+          isTheadFrozen: true //是否冻结表格首行
+        }
+      </pre>
+      <h2>例子：</h2>
+      <pre>
+        new sortedTable('.container', {
+          thead: ['姓名', '语文', '数学', '英语', '总分'],
+          data: [
+            ['小红', 80, 81, 82, 83],
+            ['小明', 99, 72, 93, 100],
+            ['小黄', 85, 98, 96, 95]
+          ],
+          sortCols: ['语文', '总分', '英语'],
+          handlerFn: [],
+          isTheadFrozen: true
+        });
+      </pre>
+    </div>
   </div>
 
   <script src="./js/task38.js"></script>
