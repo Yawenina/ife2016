@@ -25,6 +25,10 @@ function Calender(wrapperSelector, options) {
   let today = new Date();
   this.year = today.getFullYear();
   this.month = today.getMonth() + 1;
+  this.calender = null;
+  this.table = null;
+  this.yearSelect = null;
+  this.monSelect = null;
 }
 
 function renderSelect(min, max) {
@@ -35,7 +39,7 @@ function renderSelect(min, max) {
     option.textContent = i;
     option.value = i;
     if (i === this.year || i === this.month) {
-      option.setAttribute('selected', true)
+      option.setAttribute('selected', true);
     }
     fragment.appendChild(option);
   }
@@ -52,12 +56,19 @@ function renderCalenderHeader() {
   prevBtn.textContent = "<";
   prevBtn.className = 'btn prev';
   prevBtn.addEventListener('click', function () {
+    $(".mon-select option[selected='true']").removeAttribute('selected');
     this.month = this.month - 1;
-    if (this.month - 1 < 0) {
+    if (this.month  < 1) {
       this.year = this.year - 1;
       this.month = 12;
+      $(".year-select option[selected='true']").removeAttribute('selected');
+      let selector = ".year-select option[value='" + this.year + "']";
+      $(selector).setAttribute('selected', 'true');
     }
+    let selector = ".mon-select option[value='" + this.month + "']";
+    $(selector).setAttribute('selected', 'true');
     this.renderCalenderBody();
+    this.renderCalender();
   }.bind(this));
 
   //向后按钮
@@ -65,20 +76,30 @@ function renderCalenderHeader() {
   nextBtn.textContent = ">";
   nextBtn.className = 'btn next';
   nextBtn.addEventListener('click', function () {
+    $(".mon-select option[selected='true']").removeAttribute('selected');
     this.month = this.month + 1;
-    if (this.month + 1 > 12) {
+    if (this.month > 12) {
       this.year = this.year + 1;
       this.month = 1;
+      $(".year-select option[selected='true']").removeAttribute('selected');
+      let selector = ".year-select option[value='" + this.year + "']";
+      $(selector).setAttribute('selected', 'true');
     }
+    let selector = ".mon-select option[value='" + this.month + "']";
+    $(selector).setAttribute('selected', 'true');
+
     this.renderCalenderBody();
+    this.renderCalender();
   }.bind(this));
 
-  let yearSelect = this.renderSelect(1976, 2020);
-  let monSelect = this.renderSelect(1, 12);
+  this.yearSelect = this.renderSelect(1976, 2020);
+  this.yearSelect.className = 'year-select';
+  this.monSelect = this.renderSelect(1, 12);
+  this.monSelect.className = 'mon-select';
 
   div.appendChild(prevBtn);
-  div.appendChild(yearSelect);
-  div.appendChild(monSelect);
+  div.appendChild(this.yearSelect);
+  div.appendChild(this.monSelect);
   div.appendChild(nextBtn);
   return div
 }
@@ -88,18 +109,22 @@ function createCalenderData() {
   var monthDate = [];
   var monthDays = new Date(this.year, this.month - 1, 0).getDate();
   var firstDay = new Date(this.year, this.month - 1, 1).getDay();
-  week = new Array(7 - firstDay + 1);
+  week = new Array(firstDay);
   for (let i = 1; i <= monthDays; i++) {
     let date = this.formatDate(this.year, this.month, i);
-    week.push({
-      day: i,
-      date: date
-    })
+    // console.log(week.length);
+
     if (week.length == 7 || i === monthDays) {
       monthDate.push(week);
       week = [];
     }
+    week.push({
+      day: i,
+      date: date
+    })
+
   }
+  // console.log(monthDate)
   return monthDate
 }
 
@@ -131,17 +156,23 @@ function renderCalenderBody() {
     fragement.appendChild(tr);
   }
   table.appendChild(fragement);
-  return table;
+  this.table = table;
 }
 
+function renderCalender() {
+  let last = this.calender.lastElementChild;
+  this.calender.removeChild(last);
+  this.calender.appendChild(this.table);
+}
 function init() {
   let div = document.createElement('div');
   div.className = 'calender';
+  this.calender = div;
   let calenderHeader = this.renderCalenderHeader();
-  let table = this.renderCalenderBody();
   div.appendChild(calenderHeader);
+  this.renderCalenderBody();
+  div.appendChild(this.table);
   $(this.wrapperSelector).appendChild(div);
-  $(this.wrapperSelector).appendChild(table)
 }
 
 Calender.prototype = {
@@ -151,7 +182,8 @@ Calender.prototype = {
   renderCalenderHeader,
   renderCalenderBody,
   formatDate,
-  createCalenderData
+  createCalenderData,
+  renderCalender
 };
 
 new Calender('.container', {
