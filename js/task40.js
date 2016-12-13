@@ -112,8 +112,6 @@ function createCalenderData() {
   week = new Array(firstDay);
   for (let i = 1; i <= monthDays; i++) {
     let date = this.formatDate(this.year, this.month, i);
-    // console.log(week.length);
-
     if (week.length == 7 || i === monthDays) {
       monthDate.push(week);
       week = [];
@@ -124,7 +122,6 @@ function createCalenderData() {
     })
 
   }
-  // console.log(monthDate)
   return monthDate
 }
 
