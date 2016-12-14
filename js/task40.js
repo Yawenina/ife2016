@@ -94,8 +94,18 @@ function renderCalenderHeader() {
 
   this.yearSelect = this.renderSelect(1976, 2020);
   this.yearSelect.className = 'year-select';
+  this.yearSelect.addEventListener('change', function (e) {
+    this.year = e.target.value
+    this.renderCalenderBody();
+    this.renderCalender();
+  }.bind(this));
   this.monSelect = this.renderSelect(1, 12);
   this.monSelect.className = 'mon-select';
+  this.monSelect.addEventListener('change', function (e) {
+    this.month = e.target.value
+    this.renderCalenderBody();
+    this.renderCalender();
+  }.bind(this));
 
   div.appendChild(prevBtn);
   div.appendChild(this.yearSelect);
