@@ -28,18 +28,23 @@ function init() {
         this.year = this.year - 1;
         this.month = 12;
       }
-    } else {
+      this.renderCalender();
+      return false;
+    }
+    if (action.match(/next/gi)) {
       this.month = this.month + 1;
       if (this.month === 13) {
         this.year = this.year + 1;
         this.month = 1;
       }
+      this.renderCalender();
+      return false;
     }
-    this.renderCalender();
+
   }.bind(this));
 
   //生成日历
-
+  this.renderCalender();
 }
 
 
@@ -67,17 +72,53 @@ function renderHeader() {
   this.wrapper.appendChild(header);
 }
 
+function formatDate(year, month, day) {
+  month = month < 10 ? '0' + month : month;
+  day = day < 10 ? '0' + day : day;
+  return year + month + day;
+}
+
 function renderCalender() {
-  //清空之前的日期
-  //获取日期
-  //排版，绑定点击事件
+  //清空之前的日历
+  let lastChild = this.wrapper.lastElementChild;
+  if (lastChild.tagName === 'TABLE') {
+    this.wrapper.removeChild(lastChild);
+  }
+    //生成日期
+    let table = document.createElement('table');
+    let firstDay = new Date(this.year, this.month - 1, 0).getDay();
+    let monthTotalDays = new Date(this.year, this.month, 1).getDate();
+    let weekDays = new Array(firstDay);
+    let tr = document.createElement('tr');
+    this.title.textContent = this.year + '年' + this.month + '月';
+    weekDays.forEach(function (item) {
+      let td = document.createElement('td');
+      tr.appendChild(td);
+    });
+
+    for (let i = 1; i <= monthTotalDays; i++) {
+      let td = document.createElement('td');
+      td.textContent = i;
+      td.setAttribute('date', this.formatDate(this.year, this.month, i));
+      tr.appendChild(td);
+      weekDays.push(i);
+      if (weekDays.length === 7 && i !== monthTotalDays) {
+        weekDays = [];
+        table.appendChild(tr);
+        tr = document.createElement('tr');
+      } else {
+        table.appendChild(tr);
+      }
+    }
+    this.wrapper.appendChild(table);
 }
 
 Calender.prototype = {
   constructor: Calender,
   renderHeader,
   renderCalender,
+  formatDate,
   init
 }
 
-new Calender('.container')
+new Calender('.container');
