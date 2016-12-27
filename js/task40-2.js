@@ -11,7 +11,8 @@ function Calender(wrapper) {
   this.year = new Date().getFullYear();
   this.month = new Date().getMonth() + 1;
   this.title = document.createElement('h3');
-
+  this.pickedDate = document.createElement('h3');
+  this.lastPicked = null;
   this.init();
 }
 
@@ -50,11 +51,13 @@ function init() {
 
 function renderHeader() {
   let header = document.createElement('header');
+  let div = document.createElement('div');
   let prevBtn = document.createElement('button');
   let nextBtn = document.createElement('button');
   let weekday = ['日', '一', '二', '三', '四', '五', '六'];
   let weekElem = document.createElement('div');
 
+  div.className = 'content'
   prevBtn.className = 'btn prev';
   nextBtn.className = 'btn next';
   weekElem.className = 'weekday';
@@ -65,17 +68,19 @@ function renderHeader() {
     weekElem.appendChild(span);
   });
 
-  header.appendChild(prevBtn);
-  header.appendChild(this.title);
-  header.appendChild(nextBtn);
+  div.appendChild(prevBtn);
+  div.appendChild(this.title);
+  div.appendChild(nextBtn);
+  header.appendChild(div);
   header.appendChild(weekElem);
+  this.wrapper.appendChild(this.pickedDate);
   this.wrapper.appendChild(header);
 }
 
 function formatDate(year, month, day) {
   month = month < 10 ? '0' + month : month;
   day = day < 10 ? '0' + day : day;
-  return year + month + day;
+  return year + '-' + month + '-' + day;
 }
 
 function renderCalender() {
@@ -86,30 +91,39 @@ function renderCalender() {
   }
     //生成日期
     let table = document.createElement('table');
-    let firstDay = new Date(this.year, this.month - 1, 0).getDay();
-    let monthTotalDays = new Date(this.year, this.month, 1).getDate();
+    let firstDay = new Date(this.year, this.month - 1, 1).getDay();
+    let monthTotalDays = new Date(this.year, this.month, 0).getDate();
     let weekDays = new Array(firstDay);
     let tr = document.createElement('tr');
     this.title.textContent = this.year + '年' + this.month + '月';
-    weekDays.forEach(function (item) {
+    for (let i = 0; i < weekDays.length; i++) {
       let td = document.createElement('td');
+      td.textContent = '';
       tr.appendChild(td);
-    });
-
+    }
     for (let i = 1; i <= monthTotalDays; i++) {
       let td = document.createElement('td');
       td.textContent = i;
-      td.setAttribute('date', this.formatDate(this.year, this.month, i));
+      td.dataset.date = this.formatDate.call(this, this.year, this.month, i);
       tr.appendChild(td);
       weekDays.push(i);
-      if (weekDays.length === 7 && i !== monthTotalDays) {
+      if (weekDays.length === 7) {
         weekDays = [];
         table.appendChild(tr);
         tr = document.createElement('tr');
-      } else {
+      }
+      if (i === monthTotalDays) {
         table.appendChild(tr);
       }
     }
+    table.addEventListener('click', function (e) {
+      if (this.lastPicked) {
+        this.lastPicked.className = '';
+      }
+      e.target.className = 'picked';
+      this.lastPicked = e.target;
+      this.pickedDate.textContent = '当前选择的日期是：' + e.target.dataset.date;
+    }.bind(this));
     this.wrapper.appendChild(table);
 }
 
@@ -121,4 +135,4 @@ Calender.prototype = {
   init
 }
 
-new Calender('.container');
+new Calender('.calender');

@@ -1,0 +1,45 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.calender{
+  width:40%;
+  margin: 50px auto;
+}
+.calender header{
+  background: darkorange;
+  color: #fff;
+  padding: 10px 20px;
+}
+.content,
+.weekday{
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.btn{
+  border: 10px solid darkorange;
+  width:20px;
+  height:20px;
+}
+.prev{
+  border-right-color: #fff;
+}
+.next{
+  border-left-color: #fff;
+}
+table{
+  width:100%;
+  border:1px solid #eee;
+  border-collapse: collapse;
+}
+table td{
+  text-align: center;
+  padding: 10px 5px;
+  border:1px solid #eee;
+}
+table td:hover,
+table td.picked{
+  background: #ffe2b2;
+}
