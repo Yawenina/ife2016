@@ -3,11 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-.calender{
+.calender-wrapper{
   width:40%;
   margin: 50px auto;
 }
-.calender header{
+.calender-wrapper header{
   background: darkorange;
   color: #fff;
   padding: 10px 20px;
@@ -42,4 +42,13 @@ table td{
 table td:hover,
 table td.picked{
   background: #ffe2b2;
+}
+div.calender.hide{
+  display: none;
+}
+div.calender.show{
+  display: block;
+}
+div.calender{
+  margin-top:20px;
 }

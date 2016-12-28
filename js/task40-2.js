@@ -6,22 +6,29 @@ function $(selector) {
   return document.querySelector(selector);
 }
 
-function Calender(wrapper) {
+function Calender(wrapper, options) {
   this.wrapper = $(wrapper);
+  this.options = options ? options : null;
+  this.container = document.createElement('div');
   this.year = new Date().getFullYear();
   this.month = new Date().getMonth() + 1;
   this.title = document.createElement('h3');
-  this.pickedDate = document.createElement('h3');
+  this.pickedDate = document.createElement('input');
   this.lastPicked = null;
   this.init();
 }
 
 function init() {
   //日期选择框
+  this.container.className = 'calender hide';
+  this.pickedDate.addEventListener('click', function () {
+    let containerClass = this.container.className;
+    this.container.className = containerClass.indexOf('hide') > -1 ? 'calender show' : 'calender hide';
+  }.bind(this));
   //生成表格头部
   this.renderHeader();
   //wrapper绑定事件
-  this.wrapper.addEventListener('click', function (e) {
+  this.container.addEventListener('click', function (e) {
     let action = e.target.className;
     if (action.match(/prev/gi)) {
       this.month = this.month - 1;
@@ -46,6 +53,8 @@ function init() {
 
   //生成日历
   this.renderCalender();
+  this.wrapper.appendChild(this.pickedDate);
+  this.wrapper.appendChild(this.container);
 }
 
 
@@ -73,8 +82,8 @@ function renderHeader() {
   div.appendChild(nextBtn);
   header.appendChild(div);
   header.appendChild(weekElem);
-  this.wrapper.appendChild(this.pickedDate);
-  this.wrapper.appendChild(header);
+  this.container.appendChild(this.pickedDate);
+  this.container.appendChild(header);
 }
 
 function formatDate(year, month, day) {
@@ -85,9 +94,9 @@ function formatDate(year, month, day) {
 
 function renderCalender() {
   //清空之前的日历
-  let lastChild = this.wrapper.lastElementChild;
+  let lastChild = this.container.lastElementChild;
   if (lastChild.tagName === 'TABLE') {
-    this.wrapper.removeChild(lastChild);
+    this.container.removeChild(lastChild);
   }
     //生成日期
     let table = document.createElement('table');
@@ -122,9 +131,12 @@ function renderCalender() {
       }
       e.target.className = 'picked';
       this.lastPicked = e.target;
-      this.pickedDate.textContent = '当前选择的日期是：' + e.target.dataset.date;
+      this.pickedDate.value = e.target.dataset.date;
+      if (this.options && this.options.pickedCb) {
+        this.options.pickedCb(e.target.dataset.date);
+      }
     }.bind(this));
-    this.wrapper.appendChild(table);
+    this.container.appendChild(table);
 }
 
 Calender.prototype = {
@@ -135,4 +147,8 @@ Calender.prototype = {
   init
 }
 
-new Calender('.calender');
+new Calender('.calender-wrapper', {
+  pickedCb: function (value) {
+    alert('你选择的日期是' + value);
+  }
+});
