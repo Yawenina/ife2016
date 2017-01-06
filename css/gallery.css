@@ -1,0 +1,13 @@
+.gallery-3 {
+  width: 400px;
+  height: 250px; }
+  .gallery-3 img {
+    float: left; }
+    .gallery-3 img:nth-child(1) {
+      width: 275px;
+      height: 100%; }
+    .gallery-3 img:nth-child(2), .gallery-3 img:nth-child(3) {
+      width: 125px;
+      height: 125px; }
+
+/*# sourceMappingURL=gallery.css.map */

@@ -1,0 +1,16 @@
+.gallery-3{
+  width:400px;
+  height:250px;
+  img{
+    float: left;
+    &:nth-child(1){
+      width: 275px;
+      height:100%;
+    }
+    &:nth-child(2),
+    &:nth-child(3){
+      width:125px;
+      height:125px;
+    }
+  }
+}

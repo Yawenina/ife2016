@@ -1,4 +1,6 @@
 .DS_Store
 .idea
+.sass-cache
+*.css.map
 node_modules/
 js/task25-compiled.js.map
