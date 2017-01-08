@@ -14,7 +14,7 @@ let sixImgs = getImages(fiveImgs, "https://images.pexels.com/photos/2324/skyline
 
 new Gallery('.gallery-container', oneImg);
 new Gallery('.gallery-container', twoImgs);
-// new Gallery('.gallery-container', threeImgs);
+new Gallery('.gallery-container', threeImgs);
 new Gallery('.gallery-container', fourImgs);
-// new Gallery('.gallery-container', fiveImgs);
+new Gallery('.gallery-container', fiveImgs);
 new Gallery('.gallery-container', sixImgs);

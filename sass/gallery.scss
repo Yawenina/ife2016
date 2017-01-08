@@ -8,14 +8,17 @@
     position: relative;
     margin-bottom: 10px;
   }
-
+@for $i from 1 through 6{
+  .gallery-#{$i} {
+    @extend %gallery;
+  }
+}
 img {
   object-fit: cover;
   position: absolute;
 }
 
 .gallery-1{
-  @extend %gallery;
   img {
     width:100%;
     height:100%;
@@ -24,7 +27,6 @@ img {
 
 
 .gallery-2{
-  @extend %gallery;
   img{
     width:66.66%;
     height:100%;
@@ -39,21 +41,7 @@ img {
   }
 }
 
-.gallery-3{
-  @extend %gallery;
-  img{
-    float: left;
-  }
-  img:nth-child(2),
-  img:nth-child(3){
-    width:50%;
-    height:50%;
-    right:0;
-  }
-}
-
 .gallery-4{
-  @extend %gallery;
   img{
     width:50%;
     height:50%;
@@ -77,37 +65,45 @@ img {
 }
 
 .gallery-6{
-  @extend %gallery;
   img:nth-child(1){
     width:66.66%;
     height: 66.66%;
     top:0;
     left:0;
   }
-  img:nth-child(2){
+  %sameSixSize{
     width:33.33%;
     height:33.33%;
+  }
+  @for $i from 2 through 6 {
+    img:nth-child(#{$i}){
+      @extend %sameSixSize;
+    }
+  }
+  img:nth-child(2){
+    //width:33.33%;
+    //height:33.33%;
     right:0;
     top:0;
   }
   img:nth-child(3){
-    @extend img:nth-child(2);
     top:33.33%;
+    right:0;
   }
   img:nth-child(4){
-    @extend img:nth-child(2);
+    //@extend img:nth-child(2);
     top:66.66%;
     left:0;
     bottom: 0;
   }
   img:nth-child(5){
-    @extend img:nth-child(2);
+    //@extend img:nth-child(2);
     top:66.66%;
     left:33.33%;
     bottom:0;
   }
   img:nth-child(6){
-    @extend img:nth-child(2);
+    //@extend img:nth-child(2);
     top:66.66%;
     right:0;
     bottom: 0;

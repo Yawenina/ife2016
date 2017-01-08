@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0; }
 
-.gallery-1, .gallery-2, .gallery-3, .gallery-4, .gallery-6 {
+.gallery-1, .gallery-2, .gallery-3, .gallery-4, .gallery-5, .gallery-6 {
   width: 500px;
   height: 300px;
   position: relative;
@@ -22,17 +22,9 @@ img {
 .gallery-2 img:nth-child(1) {
   left: 0;
   clip-path: polygon(0 0, 100% 0, 50% 100%, 0% 100%); }
-.gallery-2 img:nth-child(2), .gallery-2 .gallery-6 img:nth-child(3), .gallery-6 .gallery-2 img:nth-child(3), .gallery-2 .gallery-6 img:nth-child(4), .gallery-6 .gallery-2 img:nth-child(4), .gallery-2 .gallery-6 img:nth-child(5), .gallery-6 .gallery-2 img:nth-child(5), .gallery-2 .gallery-6 img:nth-child(6), .gallery-6 .gallery-2 img:nth-child(6) {
+.gallery-2 img:nth-child(2) {
   right: 0;
   clip-path: polygon(50% 0, 100% 0, 100% 100%, 0% 100%); }
-
-.gallery-3 img {
-  float: left; }
-.gallery-3 img:nth-child(2), .gallery-3 .gallery-6 img:nth-child(3), .gallery-6 .gallery-3 img:nth-child(3), .gallery-3 .gallery-6 img:nth-child(4), .gallery-6 .gallery-3 img:nth-child(4), .gallery-3 .gallery-6 img:nth-child(5), .gallery-6 .gallery-3 img:nth-child(5), .gallery-3 .gallery-6 img:nth-child(6), .gallery-6 .gallery-3 img:nth-child(6),
-.gallery-3 img:nth-child(3) {
-  width: 50%;
-  height: 50%;
-  right: 0; }
 
 .gallery-4 img {
   width: 50%;
@@ -40,7 +32,7 @@ img {
 .gallery-4 img:nth-child(1) {
   left: 0;
   top: 0; }
-.gallery-4 img:nth-child(2), .gallery-4 .gallery-6 img:nth-child(3), .gallery-6 .gallery-4 img:nth-child(3), .gallery-4 .gallery-6 img:nth-child(4), .gallery-6 .gallery-4 img:nth-child(4), .gallery-4 .gallery-6 img:nth-child(5), .gallery-6 .gallery-4 img:nth-child(5), .gallery-4 .gallery-6 img:nth-child(6), .gallery-6 .gallery-4 img:nth-child(6) {
+.gallery-4 img:nth-child(2) {
   right: 0;
   top: 0; }
 .gallery-4 img:nth-child(3) {
@@ -57,11 +49,13 @@ img {
   left: 0; }
 .gallery-6 img:nth-child(2), .gallery-6 img:nth-child(3), .gallery-6 img:nth-child(4), .gallery-6 img:nth-child(5), .gallery-6 img:nth-child(6) {
   width: 33.33%;
-  height: 33.33%;
+  height: 33.33%; }
+.gallery-6 img:nth-child(2) {
   right: 0;
   top: 0; }
 .gallery-6 img:nth-child(3) {
-  top: 33.33%; }
+  top: 33.33%;
+  right: 0; }
 .gallery-6 img:nth-child(4) {
   top: 66.66%;
   left: 0;
