@@ -8,6 +8,7 @@ function wallGallery(wrapper, images, options) {
   this.padding = options.padding ? options.padding : 16;
   this.images = images;
   this.colElems = [];
+  this.colHeightList = [];
 }
 
 wallGallery.prototype.renderColumns = function () {
@@ -29,25 +30,32 @@ wallGallery.prototype.renderColumns = function () {
   this.wrapper.appendChild(wallWrapper);
 }
 
+wallGallery.prototype.initColHeight = function () {
+  let colHeightList = [];
+  for(let i = 0, len = this.columns; i < len; i++) {
+    colHeightList.push(0);
+  }
+  this.colHeightList = colHeightList;
+}
+
 wallGallery.prototype.addImg = function (imgArr) {
   for (let i = 0, len = imgArr.length; i < len; i++) {
     let img = document.createElement('img');
     img.src = imgArr[i];
     let colHeightList = [];
-    //定义一个高度的数组，每次添加图片时给该列加上高度，不用每次循环elems;
     for(let i = 0, len = this.colElems.length; i < len; i++) {
       colHeightList.push(this.colElems[i].clientHeight);
     }
-    console.log(colHeightList);
     let minHeight = Math.min.apply(null, colHeightList);
     let minHeightIdx = colHeightList.indexOf(minHeight);
-    console.log(minHeightIdx, minHeight)
     this.colElems[minHeightIdx].appendChild(img);
   }
+
 };
 
 wallGallery.prototype.init = function () {
   this.renderColumns();
+  this.initColHeight();
   this.addImg(this.images);
   return this;
 }
