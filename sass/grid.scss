@@ -1,0 +1,27 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.grid-container{
+  width: 100%;
+  &::before,
+  &::after{
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+@for $i from 1 to 12 {
+  .col-md-#{$i} {
+    width: (16.66 * $i) + '%';
+  }
+}
+
+.col-md-12{
+  width: 100%;
+}
+
