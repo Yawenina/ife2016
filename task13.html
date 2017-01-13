@@ -13,27 +13,33 @@
     <script>
         (function() {
 
-            var input = document.getElementById("aqi-input"),
-                    btn = document.getElementById("button"),
-                    text = document.getElementById("aqi-display");
-
-            //事件处理程序
-            function handler(){
-                text.innerHTML = input.value;
+            function $(id) {
+              return document.getElementById(id);
             }
 
-            //两种定义事件处理程序的方法
+            var input = $("aqi-input"),
+                    btn = $("button"),
+                    text = $("aqi-display");
 
-            //btn绑定点击事件
-            btn.addEventListener("click",handler);
-
-            //input绑定键盘事件
-            input.onkeyup = function(e){
-                if(e.keyCode === 13){
-                    handler();
+            //事件处理程序
+            function showAQI(){
+                let value = parseInt(input.value);
+                if (!isNaN(value) && (value >= 0 && value <=500)) {
+                  text.textContent = value;
+                } else {
+                  alert('请输入正确类型的值！');
+                  input.value = '';
                 }
             }
 
+            function inputHandler(e) {
+              if(e.keyCode === 13){
+                showAQI();
+              }
+            }
+
+            btn.addEventListener("click", showAQI);
+            input.addEventListener("keyup", inputHandler);
 
         })();
     </script>
