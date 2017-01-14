@@ -28,12 +28,7 @@
 
 
     <script>
-        var data = new Array();
-        var source = document.querySelector("#source"),
-                lis = source.children,
-                len = lis.length;
-        var resort = document.querySelector("#resort"),
-                btn = document.querySelector("#sort-btn");
+        var sortBtn = document.querySelector("#sort-btn");
 
         /**
          * getData方法
@@ -41,14 +36,19 @@
          * 返回一个数组，格式见函数中示例
          */
         function getData() {
+            var data = [];
+            var source = document.querySelector("#source"),
+                    lis = source.children,
+                    len = lis.length;
 
-            for(var i=0;i<len;i++){
+            for(var i = 0; i < len; i++){
                 var item = [],
-                        li = lis[i];
+                        li = lis[i],
+                        contents = li.textContent.split('空气质量：');
                 //获取城市名
-                item[0] = li.innerHTML.substr(0,li.firstChild.length-5);
+                item[0] = contents[0];
                 //获取空气质量指数
-                item[1] = li.querySelector("b").innerHTML;
+                item[1] = Number(contents[1]);
                 data.push(item);
             }
 
@@ -57,7 +57,7 @@
         }
 
         //对比函数
-        function compare(arr1,arr2){
+        function compare(arr1, arr2){
             return arr1[1] - arr2[1];
         }
         /**
@@ -75,16 +75,17 @@
          * 格式见ul中的注释的部分
          */
         function render(data) {
+            var resort = document.querySelector("#resort");
             var fragment = document.createDocumentFragment();
-            for(var i=0;i<data.length;i++){
+            for(var i = 0, len = data.length; i < len; i++){
                 var li = document.createElement("li");
-                li.innerHTML = "第"+(i+1)+"名： " +data[i][0] +"空气质量: "+"<b>"+data[i][1]+"</b>";
+                li.innerHTML = "第" + (i+1) + "名： " + data[i][0] + "空气质量: " + "<b>" + data[i][1] + "</b>";
                 fragment.appendChild(li);
             }
             resort.appendChild(fragment);
         }
 
-        function btnHandle() {
+        function btnHandler() {
             var aqiData = getData();
             aqiData = sortAqiData(aqiData);
             render(aqiData);
@@ -92,14 +93,11 @@
 
 
         function init() {
-
             // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
-
-            btn.onclick = function(){
-                btnHandle();
-                btn.disabled = true;
-            }
-
+            sortBtn.addEventListener('click', function (e) {
+                btnHandler();
+                e.target.disabled = true;
+            });
         }
 
         init();

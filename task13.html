@@ -23,6 +23,7 @@
 
             //事件处理程序
             function showAQI(){
+                //parseInt 能保证结果为number且能在该情景下能防止xss攻击；
                 let value = parseInt(input.value);
                 if (!isNaN(value) && (value >= 0 && value <=500)) {
                   text.textContent = value;

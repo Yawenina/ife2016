@@ -18,37 +18,36 @@
             ["上海", 50],
             ["福州", 10],
             ["广州", 50],
-            ["成都", 90],
+            ["成都", 80],
             ["西安", 100]
         ];
-        var ul = document.getElementById("aqi-list");
 
-        (function () {
+        function renderFilteredData() {
+            var ul = document.getElementById("aqi-list");
 
-            function compare(arr1,arr2){
+            function compare(arr1, arr2){
                 return arr1[1] - arr2[1];
             }
-
             //先筛选再排序
-            var result = aqiData.filter(function(item){
+            var sortedAqiData = aqiData.filter(function(item){
                 return item[1] > 60;
             }).sort(compare);
 
             //将排序结果插入文档片段
             var fragment = document.createDocumentFragment();
-
-            for(var i=0;i<result.length;i++){
-                var item = result[i];
-                var text = "第" + (i+1) +"名：" + item[0] +", " +item[1];
+            for(var i = 0, len = sortedAqiData.length; i < len; i++){
                 var li = document.createElement("li");
-                li.appendChild(document.createTextNode(text));
+                var item = sortedAqiData[i];
+                var text = "第" + (i+1) + "名：" + item[0] + ", " + item[1];
+                li.textContent = text;
                 fragment.appendChild(li);
             }
 
             //将文档片段插入文档
             ul.appendChild(fragment);
+        }
 
-        })();
+        window.addEventListener('load', renderFilteredData);
     </script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 #ife学习笔记
 
+1. 对于用户的输入一定要进行验证，**避免xss攻击**;
+
 ##Task25
 	- fragment后不能跟innerHTML，不会解析为正常的node
 
