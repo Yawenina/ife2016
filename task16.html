@@ -7,28 +7,13 @@
 <body>
     <div>
         <label>城市名称：<input id="aqi-city-input" type="text"></label><br>
-        <label>空气质量指数：<input id="aqi-value-input" type="text"></label><br>
+        <label>空气质量指数：<input id="aqi-value-input" type="number"></label><br>
         <button id="add-btn">确认添加</button>
     </div>
     <table id="aqi-table" border="1">
-
-        <!--
-          <tr>
-            <td>城市</td><td>空气质量</td><td>操作</td>
-          </tr>
-          <tr>
-            <td>北京</td><td>90</td><td><button>删除</button></td>
-          </tr>
-          <tr>
-            <td>北京</td><td>90</td><td><button>删除</button></td>
-          </tr>
-         -->
     </table>
 
     <script>
-        var btn = document.getElementById("add-btn"),
-                table = document.getElementById("aqi-table");
-
         /**
          * aqiData，存储用户输入的空气指数数据
          * 示例格式：
@@ -47,13 +32,14 @@
             var city = document.getElementById("aqi-city-input").value.trim(),
                     num = document.getElementById("aqi-value-input").value.trim(),
                     pattern = /^[\u4e00-\u9fa5a-zA-Z]+$/;
+
             //判断是否输入中英文字符和整数
-
-
-            if(pattern.test(city) && parseInt(num) == num){
+            if(pattern.test(city) && (num >= 0 && num <= 500)){
                 aqiData[city] = num;
             }else{
                 alert("请输入合法字符串");
+                city.value = '';
+                num.value = '';
             }
         }
 
@@ -61,16 +47,17 @@
          * 渲染aqi-table表格
          */
         function renderAqiList() {
-
+            var table = document.getElementById("aqi-table");
             var fragment = document.createDocumentFragment();
-            if(Object.keys(aqiData).length){
+            if (Object.keys(aqiData).length) {
                 table.innerHTML = "<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>";
             }else{
                 table.innerHTML = "";
+                return;
             }
-            for(key in aqiData){
+            for (let key in aqiData) {
                 var tr = document.createElement("tr");
-                tr.innerHTML = "<td>" +key+ "</td>"+ "<td>" + aqiData[key] +"</td>" + "<td><button>删除</button></button></td>";
+                tr.innerHTML = "<td>" + key + "</td><td>" + aqiData[key] +"</td><td><button data-city=" + key + ">删除</button></button></td>";
                 fragment.appendChild(tr);
             }
             table.appendChild(fragment);
@@ -89,24 +76,31 @@
          * 点击各个删除按钮的时候的处理逻辑
          * 获取哪个城市数据被删，删除数据，更新表格显示
          */
-        function delBtnHandle(target) {
+        function delBtnHandle(e) {
             // do sth.
-            var city = target.parentElement.parentElement.children[0].textContent;
-            delete aqiData[city];
-            renderAqiList();
+            let table = document.getElementById("aqi-table");
+            let parentTr = e.target.parentElement.parentElement;
+            delete aqiData[e.target.dataset.city];
+            parentTr.parentElement.removeChild(parentTr);
+
+            //没有数据不显示表格
+            if (Object.keys(aqiData).length == 0) {
+                table.innerHTML = '';
+            }
         }
 
         function init() {
+            var btn = document.getElementById("add-btn"),
+                table = document.getElementById("aqi-table");
 
             // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
-            btn.onclick = addBtnHandle;
-
+            btn.addEventListener('click', addBtnHandle);
             // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
-            table.onclick = function(e){
-                if(e.target && e.target.nodeName.toLowerCase()=="button"){
-                    delBtnHandle(e.target);
+            table.addEventListener('click', function (e) {
+                if (e.target && e.target.nodeName == "BUTTON"){
+                    delBtnHandle(e);
                 }
-            }
+            })
         }
 
         init();
