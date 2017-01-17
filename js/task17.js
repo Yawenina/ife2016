@@ -49,7 +49,7 @@ let aqiSourceData = {
 
 //记录页面状态
 let pageState = {
-  nowSelectCity: -1,
+  nowSelectCity: 0,
   nowGraTime: 'day'
 }
 
@@ -89,9 +89,45 @@ function initCitySelector() {
   citySelect.addEventListener('change', citySelectChange, false);
 }
 
+//生成图标渲染数据
+let chartData = {}
+function initAqiChartData() {
+  let city = Object.keys(aqiSourceData)[pageState.nowSelectCity];
+  chartData = aqiSourceData[city];
+
+  if (pageState.nowGraTime === 'week') {
+    let weekIdx = 1;
+    let start, end;
+    let dataList = Object.values(chartData);
+    console.log(chartData);
+    console.log(dataList)
+    console.log(Object.values(chartData))
+    chartData = {};
+    for (let i = 0; i < 91; i = i + 7) {
+      if ((i+7) <= 91) {
+        start = i;
+        end = i + 7;
+      } else {
+        start = i;
+        end = 91;
+      }
+      let total = dataList.splice(start, end).reduce((prev,next) => {
+        return prev + next;
+      }, 0)
+      let average = parseInt(total / (end - start));
+      let key = 'week' + weekIdx;
+      chartData[key] = average;
+      weekIdx++;
+    }
+    console.log(chartData);
+    return;
+  }
+}
+
 function init() {
   initGraTimeForm();
   initCitySelector();
+  initAqiChartData();
 }
 
 init();
