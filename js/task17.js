@@ -90,19 +90,14 @@ function initCitySelector() {
 }
 
 //生成图标渲染数据
-let chartData = {}
+let chartData = {"day": {}, "week": {}, "month": {}}
 function initAqiChartData() {
   let city = Object.keys(aqiSourceData)[pageState.nowSelectCity];
-  chartData = aqiSourceData[city];
-
+  chartData.day = aqiSourceData[city];
   if (pageState.nowGraTime === 'week') {
     let weekIdx = 1;
     let start, end;
-    let dataList = Object.values(chartData);
-    console.log(chartData);
-    console.log(dataList)
-    console.log(Object.values(chartData))
-    chartData = {};
+    let dataList = Object.values(chartData.day);
     for (let i = 0; i < 91; i = i + 7) {
       if ((i+7) <= 91) {
         start = i;
@@ -111,17 +106,39 @@ function initAqiChartData() {
         start = i;
         end = 91;
       }
-      let total = dataList.splice(start, end).reduce((prev,next) => {
+      //slice不会改变原数组， 而splice会改变原数组;
+      let total = dataList.slice(start, end).reduce((prev,next) => {
         return prev + next;
       }, 0)
       let average = parseInt(total / (end - start));
       let key = 'week' + weekIdx;
-      chartData[key] = average;
+      chartData.week[key] = average;
       weekIdx++;
     }
-    console.log(chartData);
     return;
   }
+
+  if (pageState.nowGraTime === 'month') {
+    let totalDays = 0;
+    for (let i = 1; i <= 12; i++){
+      //  获取一个月一共有多少天;
+      let monthDays = new Date(2016, i, 0).getDate();
+      let dataList = Object.values(chartData.day);
+      let dataDays = dataList.length;
+      let end = totalDays + monthDays <= dataDays ? totalDays + monthDays : dataDays;
+      let total = dataList.slice(totalDays, end + 1).reduce((prev,next) => {
+        return prev + next;
+      }, 0)
+      let average = parseInt(total / (end - totalDays));
+      chartData.month[i] = average;
+      totalDays += monthDays;
+      if (end >= dataDays) {
+        break;
+      }
+    }
+  }
+  console.log(chartData)
+
 }
 
 function init() {
