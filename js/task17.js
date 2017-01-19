@@ -137,7 +137,6 @@ function initAqiChartData() {
       }
     }
   }
-  console.log(chartData)
 
 }
 
