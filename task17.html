@@ -5,6 +5,9 @@
     <title>Task 17</title>
     <style>
         .aqi-chart-wrap{
+            display: flex;
+            justify-content: space-around;
+            align-items:flex-end;
             border:2px solid #b2b2b2;
             box-shadow:5px 5px 5px #d3d3d3;
             border-radius:5px;
@@ -14,6 +17,13 @@
             width:1200px;
             text-align:center;
             /*overflow: hidden;*/
+        }
+        .aqi-chart-wrap div{
+            margin-right:10px;
+            flex:1;
+        }
+        .aqi-chart-wrap div:first-child{
+            margin-left:10px;
         }
         .time{
             position:absolute;
@@ -70,7 +80,7 @@
 
     </div>
 
-    <script src="js/task17.js"></script>
+    <script src="js/task17.js?x"></script>
 
     <!--<script>-->
         <!--/* 数据格式演示-->

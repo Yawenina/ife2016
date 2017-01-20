@@ -90,14 +90,20 @@ function initCitySelector() {
 }
 
 //生成图标渲染数据
-let chartData = {"day": {}, "week": {}, "month": {}}
+let chartData = {}
 function initAqiChartData() {
   let city = Object.keys(aqiSourceData)[pageState.nowSelectCity];
-  chartData.day = aqiSourceData[city];
+  let currData = aqiSourceData[city];
+  chartData = {};
+  if (pageState.nowGraTime === 'day') {
+    chartData = currData;
+    return;
+  }
+
   if (pageState.nowGraTime === 'week') {
     let weekIdx = 1;
     let start, end;
-    let dataList = Object.values(chartData.day);
+    let dataList = Object.values(currData);
     for (let i = 0; i < 91; i = i + 7) {
       if ((i+7) <= 91) {
         start = i;
@@ -111,10 +117,11 @@ function initAqiChartData() {
         return prev + next;
       }, 0)
       let average = parseInt(total / (end - start));
-      let key = 'week' + weekIdx;
-      chartData.week[key] = average;
+      let key = weekIdx;
+      chartData[key] = average;
       weekIdx++;
     }
+
     return;
   }
 
@@ -123,27 +130,49 @@ function initAqiChartData() {
     for (let i = 1; i <= 12; i++){
       //  获取一个月一共有多少天;
       let monthDays = new Date(2016, i, 0).getDate();
-      let dataList = Object.values(chartData.day);
+      let dataList = Object.values(currData);
       let dataDays = dataList.length;
       let end = totalDays + monthDays <= dataDays ? totalDays + monthDays : dataDays;
       let total = dataList.slice(totalDays, end + 1).reduce((prev,next) => {
         return prev + next;
       }, 0)
       let average = parseInt(total / (end - totalDays));
-      chartData.month[i] = average;
+      chartData[i] = average;
       totalDays += monthDays;
       if (end >= dataDays) {
         break;
       }
     }
   }
+}
 
+let chartColor = ["#FD9191", "#FDDD8A", "#F5FC9E", "#9EFCB4", "#07689F", "#A2D5F2", "#FF7E67"];
+function renderChart() {
+  let wrapper = $('.aqi-chart-wrap');
+  wrapper.innerHTML = "";
+  let fragment = document.createDocumentFragment();
+  let i = 0;
+  let transTimeToCN = {"day": "天", "week": "周", "month": "月"};
+  let unit = transTimeToCN[pageState.nowGraTime]
+  console.log(chartData);
+  for (let key in chartData) {
+    var div = document.createElement('div');
+    var title = "第" + key + unit + ":" + chartData[key];
+    div.setAttribute("title", title);
+    div.style.height = chartData[key] + "px";
+    div.style.background = chartColor[i%7];
+    fragment.appendChild(div);
+    i++;
+  }
+
+  wrapper.appendChild(fragment);
 }
 
 function init() {
   initGraTimeForm();
   initCitySelector();
   initAqiChartData();
+  renderChart();
 }
 
 init();
