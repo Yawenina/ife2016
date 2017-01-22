@@ -18,86 +18,90 @@
 </head>
 <body>
     <form action="">
-        <input type="text" name="text" autofocus placeholder="输入数据"/>
-        <button name="in" value="leftIn">左侧入</button>
-        <button name="in" value="rightIn">右侧入</button>
-        <button name="out" value="leftOut">左侧出</button>
-        <button name="out" value="rightOut">右侧出</button>
+        <input type="text" name="text" autofocus placeholder="输入数据" class="num-input"/>
+        <div class="btn-group">
+            <button name="in" value="leftIn">左侧入</button>
+            <button name="in" value="rightIn">右侧入</button>
+            <button name="out" value="leftOut">左侧出</button>
+            <button name="out" value="rightOut">右侧出</button>
+
+        </div>
     </form>
 
     <div id="queue">
 
     </div>
-    <script>
-        var form = document.forms[0];
-        var queue = [];
+    <script src="js/task18.js"></script>
+    <!--<script>-->
+        <!--var form = document.forms[0];-->
+        <!--var queue = [];-->
 
-        var div = document.getElementById("queue");
-        //渲染#queue
-        function show(queue){
-            var fragment = document.createDocumentFragment();
-                len = queue.length;
-            div.innerHTML = '';
-            for(var i=0;i<len;i++){
-                var span = document.createElement("span");
-                span.style.height = queue[i] + "px";
-                span.setAttribute("data-index",i);
-                fragment.appendChild(span);
-            }
-            div.appendChild(fragment);
-        }
+        <!--var div = document.getElementById("queue");-->
+        <!--//渲染#queue-->
+        <!--function show(queue){-->
+            <!--var fragment = document.createDocumentFragment();-->
+                <!--len = queue.length;-->
+            <!--div.innerHTML = '';-->
+            <!--for(var i=0;i<len;i++){-->
+                <!--var span = document.createElement("span");-->
+                <!--span.style.height = queue[i] + "px";-->
+                <!--span.setAttribute("data-index",i);-->
+                <!--fragment.appendChild(span);-->
+            <!--}-->
+            <!--div.appendChild(fragment);-->
+        <!--}-->
 
-        //form表单点击事件处理函数
-        var handlerForm = function(){
-            event.preventDefault();
-            var text = form.elements["text"].value,
-                    pattern = /\d/;
-            if(event.target.type =="text"){return false;}
-            switch(event.target.value){
-                case 'leftIn':
-                    if(!pattern.test(text)){
-                        alert("请输入数字");
-                    }else if(text<10 || text>100){
-                        alert("请输入10-100之间的数字");
-                    }else{
-                        queue.length < 60 ? queue.unshift(text) : alert(text);
-                    }
-                    break;
-                case 'rightIn':
-                    if(!pattern.test(text)){
-                        alert("请输入数字");
-                    }else if(text<10 || text>100){
-                        alert("请输入10-100之间的数字");
-                    }else{
-                        queue.length < 60 ? queue.push(text) : alert(text);
-                    }
-                    break;
-                case 'leftOut':
-                    var num = queue.shift();
-                    alert(num);
-                    break;
-                case 'rightOut':
-                    var num = queue.pop();
-                    alert(num);
-                    break;
-            }
-            show(queue);
+        <!--//form表单点击事件处理函数-->
+        <!--var handlerForm = function(){-->
+            <!--event.preventDefault();-->
+            <!--var text = form.elements["text"].value,-->
+                    <!--pattern = /\d/;-->
+            <!--if(event.target.type =="text"){return false;}-->
+            <!--switch(event.target.value){-->
+                <!--case 'leftIn':-->
+                    <!--if(!pattern.test(text)){-->
+                        <!--alert("请输入数字");-->
+                    <!--}else if(text<10 || text>100){-->
+                        <!--alert("请输入10-100之间的数字");-->
+                    <!--}else{-->
+                        <!--queue.length < 60 ? queue.unshift(text) : alert(text);-->
+                    <!--}-->
+                    <!--break;-->
+                <!--case 'rightIn':-->
+                    <!--if(!pattern.test(text)){-->
+                        <!--alert("请输入数字");-->
+                    <!--}else if(text<10 || text>100){-->
+                        <!--alert("请输入10-100之间的数字");-->
+                    <!--}else{-->
+                        <!--queue.length < 60 ? queue.push(text) : alert(text);-->
+                    <!--}-->
+                    <!--break;-->
+                <!--case 'leftOut':-->
+                    <!--var num = queue.shift();-->
+                    <!--alert(num);-->
+                    <!--break;-->
+                <!--case 'rightOut':-->
+                    <!--var num = queue.pop();-->
+                    <!--alert(num);-->
+                    <!--break;-->
+            <!--}-->
+            <!--show(queue);-->
 
-            form.elements["text"].value='';
-        };
+            <!--form.elements["text"].value='';-->
+        <!--};-->
 
-        //div#queue点击事件处理程序
-        var handlerDiv = function(){
-            i = event.target.getAttribute("data-index");
-            if(i!==null){queue.splice(i,1);}
-            show(queue);
-        };
+        <!--//div#queue点击事件处理程序-->
+        <!--var handlerDiv = function(){-->
+            <!--i = event.target.getAttribute("data-index");-->
+            <!--if(i!==null){queue.splice(i,1);}-->
+            <!--show(queue);-->
+        <!--};-->
 
-        //给form绑定点击事件
-        form.addEventListener("click",handlerForm,false);
-        //给div#queue绑定点击事件
-        div.addEventListener("click",handlerDiv,false);
+        <!--//给form绑定点击事件-->
+        <!--form.addEventListener("click",handlerForm,false);-->
+        <!--//给div#queue绑定点击事件-->
+        <!--div.addEventListener("click",handlerDiv,false);-->
 
-    </script>
+    <!--</script>-->
 </body>
 </html>
