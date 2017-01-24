@@ -4,3 +4,4 @@
 *.css.map
 node_modules/
 js/task25-compiled.js.map
+yarn.lock
