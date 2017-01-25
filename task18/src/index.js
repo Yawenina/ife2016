@@ -40,6 +40,7 @@ function updateQueue(e) {
 function leftIn(val) {
   let span = document.createElement("span");
   queue.unshift(val);
+  span.dataset.val = val;
   span.style.height = val + "px";
   wrapper.insertBefore(span, wrapper.firstElementChild);
 }
@@ -47,6 +48,7 @@ function leftIn(val) {
 function rightIn(val) {
   let span = document.createElement("span");
   queue.push(val);
+  span.dataset.val = val;
   span.style.height = val + "px";
   wrapper.appendChild(span, wrapper.firstElementChild);
 }
@@ -66,8 +68,7 @@ function rightOut() {
 function sortBtnHandler(e) {
   e.preventDefault();
   let type = e.target.value;
-  sortHandlers[type](queue);
-  console.log(queue);
+  sortHandlers[type](wrapper);
 }
 
 
