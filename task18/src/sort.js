@@ -14,6 +14,9 @@ function bubbleSort(wrapper) {
         swap(arr, i, i+1);
       }
     }
+
+
+
     --len;
   }, 200)
   return arr;

@@ -1,0 +1,51 @@
+.container{
+  display: flex;
+}
+.space-info{
+  width:40%;
+  &>div {
+    border: 1px solid #ddd;
+    margin-top:20px;
+    padding: 5px;
+  }
+  .loggers{
+    height:350px;
+    overflow: auto;
+  }
+}
+
+.space{
+  width:40%;
+  height:600px;
+  background: #41506B;
+  margin:20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.star{
+  width: 240px;
+  height:240px;
+  border-radius: 50%;
+  background: #28CC9E;
+}
+
+.spaceship{
+  width: 80px;
+  height: 30px;
+  border-radius: 30px;
+  background: #F2F2F0;
+  position: absolute;
+  left:calc(50% - 40px);
+  animation: rotate 5s linear infinite;
+  transform-origin: 50% 800%;
+  text-align: center;
+}
+
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
